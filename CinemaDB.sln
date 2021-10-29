@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaDB", "CinemaDB\CinemaDB.csproj", "{14A033F6-3933-41F8-86F1-3C2A6DE6C32E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14A033F6-3933-41F8-86F1-3C2A6DE6C32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A033F6-3933-41F8-86F1-3C2A6DE6C32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A033F6-3933-41F8-86F1-3C2A6DE6C32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A033F6-3933-41F8-86F1-3C2A6DE6C32E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9732E512-86DC-4B1C-92F5-B9E4D03EBAC0}
+	EndGlobalSection
+EndGlobal

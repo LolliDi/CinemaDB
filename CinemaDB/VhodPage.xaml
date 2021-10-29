@@ -1,0 +1,29 @@
+﻿<Page x:Class="CinemaDB.VhodPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CinemaDB"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VhodPage">
+
+    <Grid>
+        <TextBlock FontSize="35" Margin="-440,-295,20,0">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="5"/>
+            </TextBlock.Effect>
+            Авторизация
+        </TextBlock>
+        <StackPanel Margin="20,30,0,0">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock FontSize="15">Введите логин:</TextBlock>
+                <TextBox Name="VhodLogin" Margin="10,0,0,5"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock  FontSize="15">Введите пароль:</TextBlock>
+                <PasswordBox Name="VhodPass" Margin="2,0,0,5"></PasswordBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
