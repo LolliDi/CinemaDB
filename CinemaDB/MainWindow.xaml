@@ -175,10 +175,10 @@ Title="MainWindow"
             </TextBlock.RenderTransform>
             <TextBlock.ToolTip>
                 <ToolTip>
-                    <TextBlock>
-                        <Run Text="Не стал блокировать при входе кнопки,"/>
+                    <TextBlock Foreground="Black">
+                        <Run Text="Админ акк - Логин: LolliDi Пароль: Lolli-345"/>
                         <LineBreak/>
-                        <Run Text="чтобы было удобнее тестировать"/>
+                        <Run Text="Если написать свой гендер в комбобокс 'Пол', то он добавится в БД"/>
 
                     </TextBlock>
                 </ToolTip>
