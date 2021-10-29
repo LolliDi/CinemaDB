@@ -9,6 +9,14 @@
       Title="PolzMainPage">
 
     <Grid>
-        
+        <TextBlock FontSize="35" Margin="-410,-295,20,0">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="5"/>
+            </TextBlock.Effect>
+            Меню
+        </TextBlock>
+        <StackPanel Margin="20,30,0,0">
+
+        </StackPanel>
     </Grid>
 </Page>

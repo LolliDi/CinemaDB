@@ -24,5 +24,17 @@ namespace CinemaDB
         {
             InitializeComponent();
         }
+
+        private void InfPolzClick(object sender, RoutedEventArgs e)
+        {
+            foreach (Window window in Application.Current.Windows) //поиск окна
+            {
+                if (window.GetType() == typeof(MainWindow))
+                {
+                    MainWindow ci = (MainWindow)window;
+                    ci.dobavstr(new AdmDannieOPolzPage(), ci.i+1);
+                }
+            }
+        }
     }
 }

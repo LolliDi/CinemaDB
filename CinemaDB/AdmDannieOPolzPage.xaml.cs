@@ -23,6 +23,20 @@ namespace CinemaDB
         public AdmDannieOPolzPage()
         {
             InitializeComponent();
+            var result = from Пользователи in dbcl.dbP.Пользователи //объединяем таблицы, чтобы заменить иды пола и роли на названия
+                         join Пол in dbcl.dbP.Пол on Пользователи.Пол equals Пол.id
+                         join Роли in dbcl.dbP.Роли on Пользователи.Роль equals Роли.id
+                         select new
+                         {
+                             id = Пользователи.id,
+                             Фамилия = Пользователи.Фамилия,
+                             Имя = Пользователи.Имя,
+                             Пол = Пол.Пол1,
+                             Роль = Роли.Роль,
+                             Логин = Пользователи.Логин,
+                             Пароль = Пользователи.Пароль
+                         };
+            DGDanPolz.ItemsSource = result.ToList();
         }
     }
 }

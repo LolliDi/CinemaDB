@@ -9,6 +9,14 @@
       Title="AdmMainPage">
 
     <Grid>
-        
+        <TextBlock FontSize="35" Margin="-410,-295,20,0">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="5"/>
+            </TextBlock.Effect>
+            Адм. Меню
+        </TextBlock>
+        <Button Width="250" Template="{StaticResource ResourceKey=but}" Margin="-170,-70,0,0" Height="30" Click="InfPolzClick">
+            <TextBlock Foreground="Black" Margin="0,2">Информация о пользователях</TextBlock>
+        </Button>
     </Grid>
 </Page>

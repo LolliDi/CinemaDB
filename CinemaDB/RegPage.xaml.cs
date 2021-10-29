@@ -25,7 +25,6 @@ namespace CinemaDB
         {
             InitializeComponent();
             RegPol.ItemsSource = dbcl.dbP.Пол.ToList();
-            
         }
     }
 }

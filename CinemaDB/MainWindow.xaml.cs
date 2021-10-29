@@ -12,7 +12,7 @@ namespace CinemaDB
     /// </summary>
     public partial class MainWindow : Window
     {
-        int i = 0; //страница сейчас
+        public int i = 0; //страница сейчас
         int ii = 0; //страниц всего
         List<object> stranpereh = new List<object>();
         //List<People> polzov = new List<People>();
@@ -60,7 +60,7 @@ namespace CinemaDB
             }
         }
 
-        private void dobavstr(object ss, int ind) //добавление страниц, индексом передавать место, в которое вставляем страницу
+        public void dobavstr(object ss, int ind) //добавление страниц, индексом передавать место, в которое вставляем страницу
         {
             if (ind < ii - 1) //если после вставленной страницы есть ещё - их удаляем
             {
@@ -230,7 +230,7 @@ namespace CinemaDB
         private void VihodClick(object sender, RoutedEventArgs e)
         {
             dialog("Вы уверены, что хотите выйти из аккаунта?", "", new VhodPage(),0);
-            if(i==0)
+            if(ii<=1)
             {
                 BtnVhod.IsEnabled = true;
                 BtnReg.IsEnabled = true;
