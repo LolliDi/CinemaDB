@@ -12,8 +12,7 @@ namespace CinemaDB
     /// </summary>
     public partial class MainWindow : Window
     {
-        String TekPolz = "", Role = ""; //текущий пользователь и роль
-        int i = 0;//страница сейчас
+        int i = 0; //страница сейчас
         int ii = 0; //страниц всего
         List<object> stranpereh = new List<object>();
         //List<People> polzov = new List<People>();
@@ -108,38 +107,37 @@ namespace CinemaDB
                 if (reg == null)
                 {
                     string strParol = "";
-                    Regex ZaglB = new Regex(@"[A-Z]");
+                    Regex ZaglB = new Regex(@"[A-Z]"); //условия для пароля
                     Regex StrB = new Regex(@"[a-z]");
                     Regex Cifr = new Regex(@"[0-9]");
                     Regex Spec = new Regex(@"\W");
-                    if (ZaglB.Matches(pas).Count < 1)
-                    {
-                        strParol += "Должна быть минимум одна заглавная латинская буква\n";
-                    }
-                    if (StrB.Matches(pas).Count < 3)
-                        strParol += "Должно быть минимум три строчных латинских букв\n";
-                    if (Cifr.Matches(pas).Count < 2)
-                        strParol += "Должно быть не менее двух цифр\n";
-                    if (Spec.Matches(pas).Count < 1)
-                        strParol += "Должно быть не менее одного спецсимвола\n";
-                    if(pas.Length<8)
-                        strParol += "Длинна пароля должна быть не менее восьми символов\n";
+                    if (ZaglB.Matches(pas).Count < 1) strParol += "Должна быть минимум одна заглавная латинская буква\n"; //проверяем подходит ли пароль под условия
+                    if (StrB.Matches(pas).Count < 3) strParol += "Должно быть минимум три строчных латинских букв\n";
+                    if (Cifr.Matches(pas).Count < 2) strParol += "Должно быть не менее двух цифр\n";
+                    if (Spec.Matches(pas).Count < 1) strParol += "Должно быть не менее одного спецсимвола\n";
+                    if(pas.Length<8) strParol += "Длинна пароля должна быть не менее восьми символов\n";
                     if (strParol == "")
                         if (pas == f.RegParolPovt.Password)
                         {
                             Пол p = dbcl.dbP.Пол.FirstOrDefault(x => x.Пол1 == pol);
                             Роли r = dbcl.dbP.Роли.FirstOrDefault(x => x.Роль == rol);
-                            if (p != null && r != null)
+                            if (p == null) //если такого гендера нет, то добавим его :)
                             {
-                                Пользователи ne = new Пользователи() { Имя = name, Фамилия = fam, Пол = p.id, Роль = r.id, Логин = login, Пароль = pas.GetHashCode().ToString() };
-                                dbcl.dbP.Пользователи.Add(ne);
-                                dbcl.dbP.SaveChanges();
-                                dialog("Аккаунт зарегестрирован!\nЖелаете войти?", "Информация", new VhodPage());
+                                dbcl.dbP.Пол.Add(new Пол(){Пол1 = pol}); 
+                                dbcl.dbP.SaveChanges(); //закинули в таблицу и сохранили
+                                p = dbcl.dbP.Пол.FirstOrDefault(x => x.Пол1 == pol); //ищем его сущность для получения ида
+                                f.RegPol.ItemsSource = dbcl.dbP.Пол.ToList();//обновляем комбобокс с гендерами
                             }
-                            else
-                            {
-                                MessageBox.Show("Что-то с полом и ролью", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
-                            }
+                            dbcl.dbP.Пользователи.Add(new Пользователи() { Имя = name, Фамилия = fam, Пол = p.id, Роль = r.id, Логин = login, Пароль = pas.GetHashCode().ToString() });
+                            dbcl.dbP.SaveChanges();
+                            dialog("Аккаунт зарегестрирован!\nЖелаете войти?", "Информация", new VhodPage(),i+1);
+                            f.RegFam.Text = "";
+                            f.RegLogin.Text = "";
+                            f.RegName.Text = "";
+                            f.RegParol.Password = "";
+                            f.RegPol.Text = "";
+                            f.RegRole.Text = "";
+                            f.RegParolPovt.Password = "";
                         }
                         else
                         {
@@ -154,7 +152,7 @@ namespace CinemaDB
                 }
                 else
                 {
-                    dialog("Пользователь с таким логином уже существует.\nЕсли это ваш аккаунт, то нажмите \"Да\" для входа!", "Ошибка", new VhodPage());
+                    dialog("Пользователь с таким логином уже существует.\nЕсли это ваш аккаунт, то нажмите \"Да\" для входа!", "Ошибка", new VhodPage(),i+1);
                     return;
                 }
             }
@@ -178,8 +176,10 @@ namespace CinemaDB
                     {
                         if (ne.Пароль == pas.GetHashCode().ToString()) //проверяем пароль
                         {
+                            BtnVhod.IsEnabled = false;
+                            BtnReg.IsEnabled = false;
+                            BtnVihod.IsEnabled = true;
                             if (ne.Роль == 1)
-
                                 dobavstr(new AdmMainPage(), 0);
                             else
                                 dobavstr(new PolzMainPage(), 0);
@@ -191,7 +191,7 @@ namespace CinemaDB
                     }
                     else
                     {
-                        dialog("Такого логина не существует!\nЖелаете зарегестрироваться?", "Ошибка авторизации!", new RegPage());
+                        dialog("Такого логина не существует!\nЖелаете зарегестрироваться?", "Ошибка авторизации!", new RegPage(),i+1);
                         return;
                     }
                 }
@@ -209,16 +209,32 @@ namespace CinemaDB
             prover();
         }
 
-        private void dialog(string s1, string s2, object ss) //вывод диалога и дальнейший переход на страницу ss, если нужно
+        private void dialog(string s1, string s2, object ss, int Nstr) //вывод диалога и дальнейший переход на страницу ss, если нужно
         {
             MessageBoxResult r = MessageBox.Show(s1, s2, MessageBoxButton.YesNo, MessageBoxImage.Information);
             switch (r)
             {
                 case MessageBoxResult.Yes:
-                    dobavstr(ss, i + 1);
+                    dobavstr(ss, Nstr);
                     break;
                 case MessageBoxResult.No:
                     break;
+            }
+        }
+
+        private void HideClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void VihodClick(object sender, RoutedEventArgs e)
+        {
+            dialog("Вы уверены, что хотите выйти из аккаунта?", "", new VhodPage(),0);
+            if(i==0)
+            {
+                BtnVhod.IsEnabled = true;
+                BtnReg.IsEnabled = true;
+                BtnVihod.IsEnabled = false;
             }
         }
     }

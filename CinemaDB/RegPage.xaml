@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <TextBlock FontSize="35" Margin="-440,-295,20,0">
+            <TextBlock FontSize="35" Margin="-400,-295,20,0">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Gray" BlurRadius="5"/>
                 </TextBlock.Effect>
@@ -24,9 +24,13 @@
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
-                    <TextBlock Foreground="Black" Margin="0,0,0,0">Женский</TextBlock>
-                    <TextBlock Foreground="Black" Margin="0,-2">Мужской</TextBlock>
-                    <TextBlock Foreground="Black" Margin="0,-2">Средний</TextBlock>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Пол1}" Foreground="Black" FontSize="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -36,14 +40,15 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock>Логин:</TextBlock>
-                <TextBox Name="RegLogin" Margin="50,0,0,5"></TextBox>
+                <TextBox Name="RegLogin" Margin="50,0,0,5">
+                </TextBox>
                 <TextBlock Margin="55,4,2,0">Роль:</TextBlock>
                 <ComboBox Name="RegRole" Width="150" Height="31" HorizontalContentAlignment="Center">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
-                    <TextBlock Foreground="Black" Margin="0,-2">Администратор</TextBlock>
-                    <TextBlock Foreground="Black" Margin="0,-2">Пользователь</TextBlock>
+                    <TextBlock Foreground="Black"  FontSize="16">Администратор</TextBlock>
+                    <TextBlock Foreground="Black"  FontSize="16">Пользователь</TextBlock>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

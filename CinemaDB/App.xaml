@@ -58,7 +58,7 @@
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="DarkGray"/>
             <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="28"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -91,7 +91,6 @@
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
-            <!---->
             <Setter Property="Margin" Value="0,0,5,7"/>
         </Style>
         <ControlTemplate TargetType="Button" x:Key="but">

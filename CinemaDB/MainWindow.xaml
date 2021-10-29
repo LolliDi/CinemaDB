@@ -9,13 +9,10 @@ Title="MainWindow"
         WindowStyle="None" 
         Background="Transparent" 
         AllowsTransparency="True" 
+        Icon="Images/logo.png"
         MouseLeftButtonDown="WindowMouseLeftButtonDown">
     <Grid Margin="10,10,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Path Stroke="#0B1538" StrokeThickness="2" SnapsToDevicePixels="True" Margin="0,4,0,-4" Grid.RowSpan="2">
+        <Path Stroke="#0B1538" StrokeThickness="2" SnapsToDevicePixels="True" Margin="0,4,0,-4" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="#3e5769"/>
             </Path.Fill>
@@ -49,7 +46,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="Black"/>
             </Path.Fill>
@@ -69,7 +66,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="Black" StrokeThickness="5" SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path Stroke="Black" StrokeThickness="5" SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="#3e5769"/>
             </Path.Fill>
@@ -85,7 +82,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path  SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path  SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="#f2e8c9"/>
             </Path.Fill>
@@ -100,7 +97,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="Black"/>
             </Path.Fill>
@@ -125,7 +122,7 @@ Title="MainWindow"
 
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="#f9b84d"/>
             </Path.Fill>
@@ -139,7 +136,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="#ff7058"/>
             </Path.Fill>
@@ -153,7 +150,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path SnapsToDevicePixels="True" Grid.RowSpan="2" Margin="-3,2.5,3,-2.5">
+        <Path SnapsToDevicePixels="True" Grid.RowSpan="2" Margin="-3,2.5,3,-2.5" Grid.ColumnSpan="2">
             <Path.Fill>
                 <SolidColorBrush Color="DarkGray"/>
             </Path.Fill>
@@ -167,7 +164,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <TextBlock Panel.ZIndex="100" Text="(?) Инфо (?)" Width="115" Margin="-22,332,747,215" Foreground="Black" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+        <TextBlock Panel.ZIndex="100" Text="(?) Инфо (?)" Width="115" Margin="-22,332,747,215" Foreground="Black" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -188,28 +185,35 @@ Title="MainWindow"
             </TextBlock.ToolTip>
             </TextBlock>
 
-        <TextBlock Text="Кинотеатр" FontSize="70" Margin="288,-32,80,495" Grid.RowSpan="2">
+        <TextBlock Text="Кинотеатр" FontSize="70" Margin="279,-33,69,496">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
         </TextBlock>
-        <Button Click="VhodClick" Height="24" Width="70" Margin="732,356,38,210" Template="{StaticResource but}" Grid.RowSpan="2">
+        <Image Source="Images\logo.png"  Margin="481,122,279,390"/>
+        <Button Name="BtnVhod" Click="VhodClick" Height="24" Width="70" Margin="733,344,37,222" Template="{StaticResource but}">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Вход</TextBlock>
         </Button>
-        <Button Margin="715,402,20,164" Width="105" Height="24" Template="{StaticResource but}" Click="RegistrClick" Grid.RowSpan="2">
+        <Button Name="BtnReg" Margin="715,375,20,191" Width="105" Height="24" Template="{StaticResource but}" Click="RegistrClick">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Регистрация</TextBlock>
         </Button>
-        <TextBlock FontSize="17" Width="130" Margin="552,496,158,0" Grid.RowSpan="2"><Run>Перемещение</Run><LineBreak/><Run>по окнам</Run></TextBlock>
-        <Button Name="BNaz" Click="nazClick" Height="24" Width="40" Margin="532,534,268,0" Template="{StaticResource but}" Grid.RowSpan="2" Panel.ZIndex="150">
+        <TextBlock FontSize="17" Width="130" Margin="542,496,158,0"><Run>Перемещение</Run><LineBreak/><Run>по окнам</Run></TextBlock>
+        <Button Name="BNaz" Click="nazClick" Height="24" Width="40" Margin="530,550,270,16" Template="{StaticResource but}" Panel.ZIndex="150">
             <TextBlock Foreground="Black" FontSize="25" Margin="0,-9"> &lt;&lt;</TextBlock>
         </Button>
-        <Button Name="BVper" Click="vperClick" Height="24" Width="40" Margin="662,534,138,0" FontSize="20" Template="{StaticResource but}" Grid.RowSpan="2" Panel.ZIndex="150">
-            <TextBlock Foreground="Black" FontSize="25" Margin="0,-9"> &gt;&gt;</TextBlock>
+        <Button Name="BVper" Click="vperClick" Height="24" Width="40" Margin="658,550,142,16" FontSize="20" Template="{StaticResource but}" Panel.ZIndex="150">
+            <TextBlock Foreground="Black" FontSize="25" Margin="0,-8,0,-10"> &gt;&gt;</TextBlock>
         </Button>
-        <Button Width="27" Background="#ff7058" Template="{StaticResource buclose}" Margin="695,259,118,303" Click="CloseClick" Grid.RowSpan="2" >
+        <Button Width="27" Background="#ff7058" Template="{StaticResource buclose}" Margin="695,259,118,303" Click="CloseClick">
             <TextBlock FontWeight="Bold" FontSize="20" Foreground="Black" Margin="0,-4,0,-8">x</TextBlock>
         </Button>
-        <Frame Name="FrameStr" NavigationUIVisibility="Hidden" Margin="108,356,138,0" Grid.RowSpan="2">
+        <Button Width="27" Background="#f9b84d" Template="{StaticResource buclose}" Margin="662,259,151,303" Click="HideClick" Panel.ZIndex="150">
+            <TextBlock FontWeight="Bold" FontSize="35" Foreground="Black" Margin="0,-17,0,-8">-</TextBlock>
+        </Button>
+        <Button Name="BtnVihod" Click="VihodClick" Height="24" Width="70" Margin="733,406,37,160" Template="{StaticResource but}" IsEnabled="False">
+            <TextBlock Foreground="Black" FontSize="15" Margin="0">Выход</TextBlock>
+        </Button>
+        <Frame Name="FrameStr" NavigationUIVisibility="Hidden" Margin="108,356,118,0">
         </Frame>
     </Grid>
 </Window>
