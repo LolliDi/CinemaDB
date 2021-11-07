@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Films.cs" />
     <Compile Include="PolzMainPage.xaml.cs">
       <DependentUpon>PolzMainPage.xaml</DependentUpon>
     </Compile>

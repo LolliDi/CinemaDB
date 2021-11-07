@@ -63,24 +63,17 @@
                                                 <ListView BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Name="LVSeansInfo"  Uid="{Binding id}" Loaded="InfSeansLoaded" Width="auto" MaxWidth="300" Height="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                                     <ListView.ItemsPanel>
                                                         <ItemsPanelTemplate>
-                                                            <WrapPanel HorizontalAlignment="Center"/>
+                                                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                                         </ItemsPanelTemplate>
                                                     </ListView.ItemsPanel>
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
                                                             <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding TimeColor}">
-                                                                <StackPanel>
+                                                                <StackPanel HorizontalAlignment="Left">
                                                                     <TextBlock Foreground="Black" Text="{Binding Дата,StringFormat={}{0:HH:mm dd.MM.yyyy}}" Margin="5,0,5,0"/>
-
-                                                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,-5">
-                                                                        <TextBlock Foreground="Black">Цена:</TextBlock>
-                                                                        <TextBlock Foreground="Black" Text="{Binding Цена}"/>
-                                                                    </StackPanel>
-                                                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,-5">
-                                                                        <TextBlock Foreground="Black">Продано:</TextBlock>
-                                                                        <TextBlock Foreground="Black" Text="{Binding Продано}"/>
-                                                                    </StackPanel>
-                                                                    <StackPanel Orientation="Horizontal" Margin="5,0,0,-5">
+                                                                    <TextBlock Foreground="Black" Text="{Binding Cena}" Margin="5,0,5,0"/>
+                                                                    <TextBlock Foreground="Black" Text="{Binding Prodano}" Margin="5,0,5,0"/>
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,0,5,0">
                                                                         <TextBlock Foreground="Black">Осталось:</TextBlock>
                                                                         <TextBlock Foreground="Black" Uid="{Binding id}" Loaded="OstalosLoaded"/>
                                                                     </StackPanel>
