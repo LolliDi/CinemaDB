@@ -18,5 +18,8 @@
         <Button Width="250" Template="{StaticResource ResourceKey=but}" Margin="-170,-70,0,0" Height="30" Click="InfPolzClick">
             <TextBlock Foreground="Black" Margin="0,2">Информация о пользователях</TextBlock>
         </Button>
+        <Button Template="{StaticResource ResourceKey=but}" Width="75" Margin="-160,0,0,0" Height="30" Click="InfFilmClick">
+            <TextBlock Foreground="Black" Margin="0,2"><Run Text="Сеансы"/></TextBlock>
+        </Button>
     </Grid>
 </Page>

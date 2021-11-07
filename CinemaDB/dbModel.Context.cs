@@ -26,8 +26,14 @@ namespace CinemaDB
         }
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Жанры> Жанры { get; set; }
+        public virtual DbSet<Залы> Залы { get; set; }
+        public virtual DbSet<Информация_о_залах> Информация_о_залах { get; set; }
+        public virtual DbSet<Ограничения> Ограничения { get; set; }
         public virtual DbSet<Пол> Пол { get; set; }
         public virtual DbSet<Пользователи> Пользователи { get; set; }
         public virtual DbSet<Роли> Роли { get; set; }
+        public virtual DbSet<Сеансы> Сеансы { get; set; }
+        public virtual DbSet<Фильмы> Фильмы { get; set; }
     }
 }

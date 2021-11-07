@@ -36,5 +36,17 @@ namespace CinemaDB
                 }
             }
         }
+
+        private void InfFilmClick(object sender, RoutedEventArgs e)
+        {
+            foreach(Window window in Application.Current.Windows)
+            {
+                if(window.GetType()==typeof(MainWindow))
+                {
+                    MainWindow c = (MainWindow)window;
+                    c.dobavstr(new Seans(), c.i + 1);
+                }
+            }    
+        }
     }
 }

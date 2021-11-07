@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище dbPolzModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище dbPolzModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -14,6 +14,39 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Жанры">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Жанр" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Залы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Сеанс" Type="int" Nullable="false" />
+          <Property Name="Зал" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="datetime" Nullable="false" />
+          <Property Name="Продано" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Информация о залах">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Особенности" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Количество мест" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ограничения">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Возраст" Type="nvarchar" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="Пол">
           <Key>
@@ -41,6 +74,48 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Роль" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="Сеансы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фильм" Type="int" Nullable="false" />
+          <Property Name="Зал" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Фильмы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Дата выхода" Type="datetime" Nullable="false" />
+          <Property Name="Возрастные ограничения" Type="int" Nullable="false" />
+          <Property Name="Жанр" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Залы_Информация о залах">
+          <End Role="Информация о залах" Type="Self.Информация о залах" Multiplicity="1" />
+          <End Role="Залы" Type="Self.Залы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Информация о залах">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Залы">
+              <PropertyRef Name="Зал" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Залы_Сеансы">
+          <End Role="Сеансы" Type="Self.Сеансы" Multiplicity="1" />
+          <End Role="Залы" Type="Self.Залы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сеансы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Залы">
+              <PropertyRef Name="Сеанс" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Пользователи_Пол">
           <End Role="Пол" Type="Self.Пол" Multiplicity="1" />
           <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
@@ -65,11 +140,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Сеансы_Фильмы">
+          <End Role="Фильмы" Type="Self.Фильмы" Multiplicity="1" />
+          <End Role="Сеансы" Type="Self.Сеансы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Фильмы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сеансы">
+              <PropertyRef Name="Фильм" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Фильмы_Жанры">
+          <End Role="Жанры" Type="Self.Жанры" Multiplicity="1" />
+          <End Role="Фильмы" Type="Self.Фильмы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Жанры">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Фильмы">
+              <PropertyRef Name="Жанр" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Фильмы_Ограничения">
+          <End Role="Ограничения" Type="Self.Ограничения" Multiplicity="1" />
+          <End Role="Фильмы" Type="Self.Фильмы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ограничения">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Фильмы">
+              <PropertyRef Name="Возрастные ограничения" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище dbPolzModelContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Жанры" EntityType="Self.Жанры" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Залы" EntityType="Self.Залы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Информация о залах" EntityType="Self.Информация о залах" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ограничения" EntityType="Self.Ограничения" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пол" EntityType="Self.Пол" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Роли" EntityType="Self.Роли" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сеансы" EntityType="Self.Сеансы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Фильмы" EntityType="Self.Фильмы" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Залы_Информация о залах" Association="Self.FK_Залы_Информация о залах">
+            <End Role="Информация о залах" EntitySet="Информация о залах" />
+            <End Role="Залы" EntitySet="Залы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Залы_Сеансы" Association="Self.FK_Залы_Сеансы">
+            <End Role="Сеансы" EntitySet="Сеансы" />
+            <End Role="Залы" EntitySet="Залы" />
+          </AssociationSet>
           <AssociationSet Name="FK_Пользователи_Пол" Association="Self.FK_Пользователи_Пол">
             <End Role="Пол" EntitySet="Пол" />
             <End Role="Пользователи" EntitySet="Пользователи" />
@@ -78,55 +203,215 @@
             <End Role="Роли" EntitySet="Роли" />
             <End Role="Пользователи" EntitySet="Пользователи" />
           </AssociationSet>
+          <AssociationSet Name="FK_Сеансы_Фильмы" Association="Self.FK_Сеансы_Фильмы">
+            <End Role="Фильмы" EntitySet="Фильмы" />
+            <End Role="Сеансы" EntitySet="Сеансы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Фильмы_Жанры" Association="Self.FK_Фильмы_Жанры">
+            <End Role="Жанры" EntitySet="Жанры" />
+            <End Role="Фильмы" EntitySet="Фильмы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Фильмы_Ограничения" Association="Self.FK_Фильмы_Ограничения">
+            <End Role="Ограничения" EntitySet="Ограничения" />
+            <End Role="Фильмы" EntitySet="Фильмы" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbPolzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="dbPolzModel.sysdiagrams" />
+          <EntitySet Name="Жанры" EntityType="dbPolzModel.Жанры" />
+          <EntitySet Name="Залы" EntityType="dbPolzModel.Залы" />
+          <EntitySet Name="Информация_о_залах" EntityType="dbPolzModel.Информация_о_залах" />
+          <EntitySet Name="Ограничения" EntityType="dbPolzModel.Ограничения" />
+          <EntitySet Name="Пол" EntityType="dbPolzModel.Пол" />
+          <EntitySet Name="Пользователи" EntityType="dbPolzModel.Пользователи" />
+          <EntitySet Name="Роли" EntityType="dbPolzModel.Роли" />
+          <EntitySet Name="Сеансы" EntityType="dbPolzModel.Сеансы" />
+          <EntitySet Name="Фильмы" EntityType="dbPolzModel.Фильмы" />
+          <AssociationSet Name="FK_Фильмы_Жанры" Association="dbPolzModel.FK_Фильмы_Жанры">
+            <End Role="Жанры" EntitySet="Жанры" />
+            <End Role="Фильмы" EntitySet="Фильмы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Залы_Информация_о_залах" Association="dbPolzModel.FK_Залы_Информация_о_залах">
+            <End Role="Информация_о_залах" EntitySet="Информация_о_залах" />
+            <End Role="Залы" EntitySet="Залы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Залы_Сеансы" Association="dbPolzModel.FK_Залы_Сеансы">
+            <End Role="Сеансы" EntitySet="Сеансы" />
+            <End Role="Залы" EntitySet="Залы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Фильмы_Ограничения" Association="dbPolzModel.FK_Фильмы_Ограничения">
+            <End Role="Ограничения" EntitySet="Ограничения" />
+            <End Role="Фильмы" EntitySet="Фильмы" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Пол" Association="dbPolzModel.FK_Пользователи_Пол">
+            <End Role="Пол" EntitySet="Пол" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователи_Роли1" Association="dbPolzModel.FK_Пользователи_Роли1">
+            <End Role="Роли" EntitySet="Роли" />
+            <End Role="Пользователи" EntitySet="Пользователи" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сеансы_Фильмы" Association="dbPolzModel.FK_Сеансы_Фильмы">
+            <End Role="Фильмы" EntitySet="Фильмы" />
+            <End Role="Сеансы" EntitySet="Сеансы" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Жанры">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Жанр" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Фильмы" Relationship="dbPolzModel.FK_Фильмы_Жанры" FromRole="Жанры" ToRole="Фильмы" />
+        </EntityType>
+        <EntityType Name="Залы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Сеанс" Type="Int32" Nullable="false" />
+          <Property Name="Зал" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Продано" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Информация_о_залах" Relationship="dbPolzModel.FK_Залы_Информация_о_залах" FromRole="Залы" ToRole="Информация_о_залах" />
+          <NavigationProperty Name="Сеансы" Relationship="dbPolzModel.FK_Залы_Сеансы" FromRole="Залы" ToRole="Сеансы" />
+        </EntityType>
+        <EntityType Name="Информация_о_залах">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Особенности" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Количество_мест" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Залы" Relationship="dbPolzModel.FK_Залы_Информация_о_залах" FromRole="Информация_о_залах" ToRole="Залы" />
+        </EntityType>
+        <EntityType Name="Ограничения">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Возраст" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Фильмы" Relationship="dbPolzModel.FK_Фильмы_Ограничения" FromRole="Ограничения" ToRole="Фильмы" />
         </EntityType>
         <EntityType Name="Пол">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Пол1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Пол" FromRole="Пол" ToRole="Пользователи" />
+          <Property Name="Пол1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пользователи" Relationship="dbPolzModel.FK_Пользователи_Пол" FromRole="Пол" ToRole="Пользователи" />
         </EntityType>
         <EntityType Name="Пользователи">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Имя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Пол" Type="Int32" Nullable="false" />
           <Property Name="Роль" Type="Int32" Nullable="false" />
-          <Property Name="Логин" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Пароль" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пол1" Relationship="Self.FK_Пользователи_Пол" FromRole="Пользователи" ToRole="Пол" />
-          <NavigationProperty Name="Роли" Relationship="Self.FK_Пользователи_Роли1" FromRole="Пользователи" ToRole="Роли" />
+          <Property Name="Логин" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Пароль" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пол1" Relationship="dbPolzModel.FK_Пользователи_Пол" FromRole="Пользователи" ToRole="Пол" />
+          <NavigationProperty Name="Роли" Relationship="dbPolzModel.FK_Пользователи_Роли1" FromRole="Пользователи" ToRole="Роли" />
         </EntityType>
         <EntityType Name="Роли">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Роль" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Пользователи" Relationship="Self.FK_Пользователи_Роли1" FromRole="Роли" ToRole="Пользователи" />
+          <Property Name="Роль" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Пользователи" Relationship="dbPolzModel.FK_Пользователи_Роли1" FromRole="Роли" ToRole="Пользователи" />
         </EntityType>
+        <EntityType Name="Сеансы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фильм" Type="Int32" Nullable="false" />
+          <Property Name="Зал" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Залы" Relationship="dbPolzModel.FK_Залы_Сеансы" FromRole="Сеансы" ToRole="Залы" />
+          <NavigationProperty Name="Фильмы" Relationship="dbPolzModel.FK_Сеансы_Фильмы" FromRole="Сеансы" ToRole="Фильмы" />
+        </EntityType>
+        <EntityType Name="Фильмы">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_выхода" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Возрастные_ограничения" Type="Int32" Nullable="false" />
+          <Property Name="Жанр" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Жанры" Relationship="dbPolzModel.FK_Фильмы_Жанры" FromRole="Фильмы" ToRole="Жанры" />
+          <NavigationProperty Name="Ограничения" Relationship="dbPolzModel.FK_Фильмы_Ограничения" FromRole="Фильмы" ToRole="Ограничения" />
+          <NavigationProperty Name="Сеансы" Relationship="dbPolzModel.FK_Сеансы_Фильмы" FromRole="Фильмы" ToRole="Сеансы" />
+        </EntityType>
+        <Association Name="FK_Фильмы_Жанры">
+          <End Type="dbPolzModel.Жанры" Role="Жанры" Multiplicity="1" />
+          <End Type="dbPolzModel.Фильмы" Role="Фильмы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Жанры">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Фильмы">
+              <PropertyRef Name="Жанр" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Залы_Информация_о_залах">
+          <End Type="dbPolzModel.Информация_о_залах" Role="Информация_о_залах" Multiplicity="1" />
+          <End Type="dbPolzModel.Залы" Role="Залы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Информация_о_залах">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Залы">
+              <PropertyRef Name="Зал" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Залы_Сеансы">
+          <End Type="dbPolzModel.Сеансы" Role="Сеансы" Multiplicity="1" />
+          <End Type="dbPolzModel.Залы" Role="Залы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сеансы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Залы">
+              <PropertyRef Name="Сеанс" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Фильмы_Ограничения">
+          <End Type="dbPolzModel.Ограничения" Role="Ограничения" Multiplicity="1" />
+          <End Type="dbPolzModel.Фильмы" Role="Фильмы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ограничения">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Фильмы">
+              <PropertyRef Name="Возрастные_ограничения" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Пользователи_Пол">
-          <End Role="Пол" Type="Self.Пол" Multiplicity="1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <End Type="dbPolzModel.Пол" Role="Пол" Multiplicity="1" />
+          <End Type="dbPolzModel.Пользователи" Role="Пользователи" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Пол">
               <PropertyRef Name="id" />
@@ -137,8 +422,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Пользователи_Роли1">
-          <End Role="Роли" Type="Self.Роли" Multiplicity="1" />
-          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="*" />
+          <End Type="dbPolzModel.Роли" Role="Роли" Multiplicity="1" />
+          <End Type="dbPolzModel.Пользователи" Role="Пользователи" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Роли">
               <PropertyRef Name="id" />
@@ -148,20 +433,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Пол" EntityType="Self.Пол" />
-          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
-          <EntitySet Name="Роли" EntityType="Self.Роли" />
-          <AssociationSet Name="FK_Пользователи_Пол" Association="Self.FK_Пользователи_Пол">
-            <End Role="Пол" EntitySet="Пол" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Пользователи_Роли1" Association="Self.FK_Пользователи_Роли1">
-            <End Role="Роли" EntitySet="Роли" />
-            <End Role="Пользователи" EntitySet="Пользователи" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK_Сеансы_Фильмы">
+          <End Type="dbPolzModel.Фильмы" Role="Фильмы" Multiplicity="1" />
+          <End Type="dbPolzModel.Сеансы" Role="Сеансы" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Фильмы">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Сеансы">
+              <PropertyRef Name="Фильм" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -171,40 +454,97 @@
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="dbPolzModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Жанры">
+            <EntityTypeMapping TypeName="dbPolzModel.Жанры">
+              <MappingFragment StoreEntitySet="Жанры">
+                <ScalarProperty Name="Жанр" ColumnName="Жанр" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Залы">
+            <EntityTypeMapping TypeName="dbPolzModel.Залы">
+              <MappingFragment StoreEntitySet="Залы">
+                <ScalarProperty Name="Продано" ColumnName="Продано" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Зал" ColumnName="Зал" />
+                <ScalarProperty Name="Сеанс" ColumnName="Сеанс" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Информация_о_залах">
+            <EntityTypeMapping TypeName="dbPolzModel.Информация_о_залах">
+              <MappingFragment StoreEntitySet="Информация о залах">
+                <ScalarProperty Name="Количество_мест" ColumnName="Количество мест" />
+                <ScalarProperty Name="Особенности" ColumnName="Особенности" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ограничения">
+            <EntityTypeMapping TypeName="dbPolzModel.Ограничения">
+              <MappingFragment StoreEntitySet="Ограничения">
+                <ScalarProperty Name="Возраст" ColumnName="Возраст" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Пол">
             <EntityTypeMapping TypeName="dbPolzModel.Пол">
               <MappingFragment StoreEntitySet="Пол">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Пол1" ColumnName="Пол" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Пользователи">
             <EntityTypeMapping TypeName="dbPolzModel.Пользователи">
               <MappingFragment StoreEntitySet="Пользователи">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Пол" ColumnName="Пол" />
-                <ScalarProperty Name="Роль" ColumnName="Роль" />
-                <ScalarProperty Name="Логин" ColumnName="Логин" />
                 <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="Пол" ColumnName="Пол" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Роли">
             <EntityTypeMapping TypeName="dbPolzModel.Роли">
               <MappingFragment StoreEntitySet="Роли">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Роль" ColumnName="Роль" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сеансы">
+            <EntityTypeMapping TypeName="dbPolzModel.Сеансы">
+              <MappingFragment StoreEntitySet="Сеансы">
+                <ScalarProperty Name="Зал" ColumnName="Зал" />
+                <ScalarProperty Name="Фильм" ColumnName="Фильм" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Фильмы">
+            <EntityTypeMapping TypeName="dbPolzModel.Фильмы">
+              <MappingFragment StoreEntitySet="Фильмы">
+                <ScalarProperty Name="Жанр" ColumnName="Жанр" />
+                <ScalarProperty Name="Возрастные_ограничения" ColumnName="Возрастные ограничения" />
+                <ScalarProperty Name="Дата_выхода" ColumnName="Дата выхода" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

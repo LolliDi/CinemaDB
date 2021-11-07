@@ -24,8 +24,8 @@
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
+                    
 
-                   
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

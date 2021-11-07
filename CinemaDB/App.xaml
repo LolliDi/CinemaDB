@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:CinemaDB"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+       
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="3"/>
         </Style>
