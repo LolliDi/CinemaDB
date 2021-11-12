@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DobiRedFilm">
-
+ 
     <Grid>
         <TextBlock FontSize="35" Margin="-410,-295,20,0" Name ="Zag">
             <TextBlock.Effect>
