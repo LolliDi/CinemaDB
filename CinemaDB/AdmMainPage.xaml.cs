@@ -33,6 +33,7 @@ namespace CinemaDB
                 {
                     MainWindow ci = (MainWindow)window;
                     ci.dobavstr(new AdmDannieOPolzPage(), ci.i+1);
+                    break;
                 }
             }
         }
@@ -45,8 +46,21 @@ namespace CinemaDB
                 {
                     MainWindow c = (MainWindow)window;
                     c.dobavstr(new Seans(), c.i + 1);
+                    break;
                 }
             }    
+        }
+
+        private void DobPolzClick(object sender, RoutedEventArgs e)
+        {
+            foreach(Window window in Application.Current.Windows)
+            {
+                if(window.GetType()==typeof(MainWindow))
+                {
+                    MainWindow c = (MainWindow)window;
+                    c.dobavstr(new DobiRedFilm(), c.i + 1);
+                }
+            }
         }
     }
 }

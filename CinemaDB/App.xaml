@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:CinemaDB"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-       
+
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="3"/>
         </Style>
@@ -41,6 +41,20 @@
                     <Setter Property="Background" Value="#7FB5B5"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBox Visibility="Collapsed" FontSize="13" Width="128" Height="23" FontWeight="DemiBold"  Margin="0"  BorderBrush="#232C16"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Calendar" x:Key="DateTimeCalendar">
+            <Setter Property="Background" Value="#f7575E4E"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
         <Style TargetType="CheckBox">
             <Setter Property="BorderBrush" Value="#232C16"/>

@@ -21,5 +21,8 @@
         <Button Template="{StaticResource ResourceKey=but}" Width="75" Margin="-160,0,0,0" Height="30" Click="InfFilmClick">
             <TextBlock Foreground="Black" Margin="0,2"><Run Text="Сеансы"/></TextBlock>
         </Button>
+        <Button Template="{StaticResource ResourceKey=but}" Margin="-160,70,0,0" Height="30" Width="160" Click="DobPolzClick">
+            <TextBlock Foreground="Black" Margin="0,2"><Run Text="Добавить фильмы"/></TextBlock>
+        </Button>
     </Grid>
 </Page>

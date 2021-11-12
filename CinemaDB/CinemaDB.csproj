@@ -78,6 +78,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DobiRedFilm.xaml.cs">
+      <DependentUpon>DobiRedFilm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PolzMainPage.xaml.cs">
       <DependentUpon>PolzMainPage.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdmMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DobiRedFilm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
