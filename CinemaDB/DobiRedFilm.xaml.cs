@@ -29,7 +29,7 @@ namespace CinemaDB
             NazvFilm.ItemsSource = dbcl.dbP.Фильмы.Select(x => x.Название).ToList();
             NazvFilm.Text = "";
         }
-
+        bool film = false;
         private void DPDate_Changed(object sender, TextChangedEventArgs e)
         {
             Regex form = new Regex(@"\d\d:\d\d \d\d?\.\d\d?\.\d\d\d\d");
@@ -53,6 +53,7 @@ namespace CinemaDB
                 TBDate.Text = p.Дата_выхода.ToString("HH:mm dd.MM.yyyy");
                 CBZhanr.Text = p.Жанры.Жанр;
                 CBOgran.Text = p.Ограничения.Возраст;
+                film = true;
             }
             else
             {
@@ -60,18 +61,43 @@ namespace CinemaDB
                 DPDate.IsEnabled = true;
                 CBZhanr.IsEnabled = true;
                 CBOgran.IsEnabled = true;
+                film = false;
             }
-        }
-
-        private void CBChanged(object sender, TextChangedEventArgs e)
-        {
-            Сеансы p = dbcl.dbP.Сеансы.FirstOrDefault(x => x.Зал == Convert.ToInt32(CBZal.Text));
-            
         }
 
         private void SohrClick(object sender, RoutedEventArgs e)
         {
+            
+            string nazv = NazvFilm.Text, ogr = CBOgran.Text, dateVih = TBDate.Text, zhanr = CBZhanr.Text, zal = CBZal.Text, cena = TBCena.Text, datSeans = TBDateSeans.Text, prodano = TBProdano.Text;
+            if ((film || (nazv != "" && ogr != "" && dateVih != "" && zhanr != "")) && zal!=""&&cena!=""&&datSeans!=""&&prodano!="")
+            {
+                Regex form = new Regex(@"\d\d:\d\d \d\d?\.\d\d?\.\d\d\d\d");
+                if (!film)
+                {
+                    if(!form.IsMatch(dateVih))
+                    {
+                        MessageBox.Show("Введены не все данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                
 
+            }
+            else
+            {
+                MessageBox.Show("Введены не все данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+        }
+
+        private void DPDateSeansChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex form = new Regex(@"\d\d:\d\d \d\d?\.\d\d?\.\d\d\d\d");
+            string text = TBDateSeans.Text;
+            if (text == "" || !form.IsMatch(text)) //сохраняем ранее введенное время, если формат ввода верный
+                text = "00:00 ";
+            else
+                text = TBDateSeans.Text.Substring(0, 6);
+            TBDateSeans.Text = text + DPDateSeans.Text;
         }
     }
 }

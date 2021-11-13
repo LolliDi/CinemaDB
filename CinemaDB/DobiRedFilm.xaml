@@ -45,7 +45,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <TextBlock Margin="5">Зал:</TextBlock>
-                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal" IsEditable="True" TextBoxBase.TextChanged="CBChanged">
+                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal" IsEditable="True">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
@@ -59,7 +59,7 @@
                 <TextBlock Margin="100,7,5,0">Дата Сеанса:</TextBlock>
                 <Grid>
                     <TextBox  Name="TBDateSeans" Text="{Binding Mode=OneWay, StringFormat='HH:mm dd.MM.yyyy'}"/>
-                    <DatePicker x:Name="DPDateSeans" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
+                    <DatePicker x:Name="DPDateSeans" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDateSeansChanged" Background="Transparent" BorderBrush="Transparent"/>
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
