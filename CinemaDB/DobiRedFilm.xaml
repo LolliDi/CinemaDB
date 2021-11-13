@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DobiRedFilm">
- 
+
     <Grid>
         <TextBlock FontSize="35" Margin="-410,-295,20,0" Name ="Zag">
             <TextBlock.Effect>
@@ -17,9 +17,13 @@
         </TextBlock>
         <StackPanel Orientation="Vertical" Margin="-5,-5,0,10">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5">Название:</TextBlock>
-                <TextBox/>
-                <TextBlock Margin="5">Ограничение:</TextBlock>
+                <TextBlock Margin="5,7,30,0">Название:</TextBlock>
+                <ComboBox  Width="195" Height="36" Foreground="Black" Name="NazvFilm" IsEditable="True" TextBoxBase.TextChanged="TBCBChanged">
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
+                    </ComboBox.Resources>
+                </ComboBox>
+                <TextBlock Margin="30,7,5,0">Ограничение:</TextBlock>
                 <ComboBox Name="CBOgran" Width="70" Height="36" Foreground="Black">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
@@ -27,19 +31,40 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="5">Дата выхода:</TextBlock>
-                <TextBox Width="195" Name="TBDate" Text="{Binding Mode=OneWay, StringFormat='HH:mm dd.MM.yyyy'}"/>
-                <DatePicker Name="DPDate" Height="36" Width="35" Margin="-7" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
-                <TextBlock Margin="5">Жанр:</TextBlock>
+                <TextBlock Margin="5,7,0,0">Дата выхода:</TextBlock>
+                <Grid>
+                    <TextBox Width="195" Name="TBDate" Text="{Binding Mode=OneWay, StringFormat='HH:mm dd.MM.yyyy'}"/>
+                    <DatePicker x:Name="DPDate" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
+                </Grid>
+                <TextBlock Margin="24,7,62,0">Жанр:</TextBlock>
                 <ComboBox Name="CBZhanr" Width="140" Height="36" Foreground="Black">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
                 </ComboBox>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <TextBlock Margin="5">Зал:</TextBlock>
+                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal" IsEditable="True" TextBoxBase.TextChanged="CBChanged">
+                    <ComboBox.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
+                    </ComboBox.Resources>
+                </ComboBox>
+                <TextBlock Margin="10,7,38,0">Цена:</TextBlock>
+                <TextBox Name="TBCena"></TextBox>
+                <Button Template="{StaticResource but}" Height="30" Margin="60,-10,0,0" Click="SohrClick">
+                    <TextBlock FontSize="19" Margin="7,0,7,0" Foreground="Black">Сохранить</TextBlock></Button>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
-                
-
+                <TextBlock Margin="100,7,5,0">Дата Сеанса:</TextBlock>
+                <Grid>
+                    <TextBox  Name="TBDateSeans" Text="{Binding Mode=OneWay, StringFormat='HH:mm dd.MM.yyyy'}"/>
+                    <DatePicker x:Name="DPDateSeans" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
+                </Grid>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="110,7,21,0">Продано:</TextBlock>
+                <TextBox Name="TBProdano"></TextBox>
             </StackPanel>
         </StackPanel>
     </Grid>
