@@ -29,7 +29,7 @@ namespace CinemaDB
             NazvFilm.ItemsSource = dbcl.dbP.Фильмы.Select(x => x.Название).ToList();
             NazvFilm.Text = "";
         }
-        bool film = false;
+        bool film = false; //существует ли фильм
         private void DPDate_Changed(object sender, TextChangedEventArgs e)
         {
             Regex form = new Regex(@"\d\d:\d\d \d\d?\.\d\d?\.\d\d\d\d");
@@ -67,24 +67,74 @@ namespace CinemaDB
 
         private void SohrClick(object sender, RoutedEventArgs e)
         {
-            
-            string nazv = NazvFilm.Text, ogr = CBOgran.Text, dateVih = TBDate.Text, zhanr = CBZhanr.Text, zal = CBZal.Text, cena = TBCena.Text, datSeans = TBDateSeans.Text, prodano = TBProdano.Text;
-            if ((film || (nazv != "" && ogr != "" && dateVih != "" && zhanr != "")) && zal!=""&&cena!=""&&datSeans!=""&&prodano!="")
+            string rez="";
+            try
             {
-                Regex form = new Regex(@"\d\d:\d\d \d\d?\.\d\d?\.\d\d\d\d");
-                if (!film)
+                string nazv = NazvFilm.Text, ogr = CBOgran.Text, dateVih = TBDate.Text, zhanr = CBZhanr.Text, zal = CBZal.Text, cena = TBCena.Text, datSeans = TBDateSeans.Text, prodano = TBProdano.Text;
+                if ((film || (nazv != "" && ogr != "" && dateVih != "" && zhanr != "")) && zal != "" && cena != "" && datSeans != "" && prodano != "")
                 {
-                    if(!form.IsMatch(dateVih))
+                    Regex form = new Regex(@"\d\d?:\d\d? \d\d?\.\d\d?\.\d\d\d\d");
+                    if (!film)
                     {
-                        MessageBox.Show("Введены не все данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
-                
+                        if (!form.IsMatch(dateVih))
+                        {
+                            throw new Exception("Неверный формат пункта \"Дата выхода фильма\"!\nВведите дату в следующем формате:\n15:00 01.01.2000");
+                        }
+                        int idOgran = dbcl.dbP.Ограничения.FirstOrDefault(x => x.Возраст == ogr).id;
+                        if (idOgran != 0)
+                        {
+                            int idZhanr = dbcl.dbP.Жанры.FirstOrDefault(x => x.Жанр == zhanr).id;
+                            if(idZhanr==0)
+                            {
+                                MessageBoxResult res = MessageBox.Show("Такого жанра фильма не существует в базе!\nЖелаете добавить?\nЕсли выберете \"Нет\", то поменяйте жанр сами!", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                                if (res == MessageBoxResult.Yes)
+                                {
+                                    dbcl.dbP.Жанры.Add(new Жанры() { Жанр = zhanr });
+                                    dbcl.dbP.SaveChanges();
+                                    idZhanr = dbcl.dbP.Жанры.FirstOrDefault(x => x.Жанр == zhanr).id;
+                                    rez += "Жанр; ";
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                            }
+                            dbcl.dbP.Фильмы.Add(new Фильмы() { Название = nazv, Дата_выхода = DateTime.ParseExact(dateVih, "hh:mm dd.MM.yyyy", null), Жанр = idZhanr, Возрастные_ограничения = idOgran });
+                            dbcl.dbP.SaveChanges();
+                            rez += "Фильм; ";
 
+                        }
+                        else
+                        {
+                            throw new Exception("Проблема с ограничением возраста!\nИзмените свой выбор или перевыберите текущий вариант.");
+                        }
+                    }
+                    if (!form.IsMatch(datSeans))
+                    {
+                        throw new Exception("Неверный формат пункта \"Дата сеанса\"!\nВведите дату в следующем формате:\n15:00 01.01.2000");
+                    }
+                    int idZal = Convert.ToInt32(zal);
+                    int idFilm = dbcl.dbP.Фильмы.FirstOrDefault(x => x.Название == nazv).id;
+                    int idSeans = dbcl.dbP.Сеансы.FirstOrDefault(x => x.Фильм == idFilm && x.Зал == idZal).id;
+                    if (idSeans==0)
+                    {
+                        dbcl.dbP.Сеансы.Add(new Сеансы() { Зал = idZal, Фильм = idFilm });
+                        dbcl.dbP.SaveChanges();
+                        idSeans = dbcl.dbP.Сеансы.FirstOrDefault(x => x.Фильм == idFilm && x.Зал == idZal).id;
+                    }
+                    dbcl.dbP.Залы.Add(new Залы() { Сеанс = idSeans, Зал = idZal, Цена = Convert.ToInt32(cena), Дата = DateTime.ParseExact(datSeans, "hh:mm dd.MM.yyyy", null), Продано = Convert.ToInt32(prodano) });
+                    dbcl.dbP.SaveChanges();
+                    rez += "Сеанс - успешно добавлено!";
+                    MessageBox.Show(rez, "Успешно!");
+                }
+                else
+                {
+                    throw new Exception("Введены не все данные!\nПерепроверьте данные и введите недостающие.");
+                }
             }
-            else
+            catch(Exception ee)
             {
-                MessageBox.Show("Введены не все данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(""+ee, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }

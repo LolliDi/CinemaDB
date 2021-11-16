@@ -37,7 +37,7 @@
                     <DatePicker x:Name="DPDate" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
                 </Grid>
                 <TextBlock Margin="24,7,62,0">Жанр:</TextBlock>
-                <ComboBox Name="CBZhanr" Width="140" Height="36" Foreground="Black">
+                <ComboBox Name="CBZhanr" Width="150" Height="36" Foreground="Black" IsEditable="True">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
@@ -45,7 +45,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <TextBlock Margin="5">Зал:</TextBlock>
-                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal" IsEditable="True">
+                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
