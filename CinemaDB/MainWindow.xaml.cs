@@ -14,7 +14,7 @@ namespace CinemaDB
     {
         public int i = 0; //страница сейчас
         int ii = 0; //страниц всего
-        List<object> stranpereh = new List<object>();
+        public List<object> stranpereh = new List<object>();
         //List<People> polzov = new List<People>();
 
         public MainWindow()
@@ -22,7 +22,7 @@ namespace CinemaDB
             InitializeComponent();
             dbcl.dbP = new dbEntities();
             ClFrame.Fr = FrameStr;
-            dobavstr(new DobiRedFilm(), i);
+            dobavstr(new AdmMainPage(), i);
         }
         private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перемещение окна мышкой
         {

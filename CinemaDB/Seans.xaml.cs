@@ -66,5 +66,33 @@ namespace CinemaDB
             int prod = dbcl.dbP.Информация_о_залах.FirstOrDefault(x => x.id == zal).Количество_мест - dbcl.dbP.Залы.FirstOrDefault(x => x.id == uid).Продано;
             tb.Text = prod.ToString();
         }
+
+        private void IzmenFilmClick(object sender, RoutedEventArgs e)
+        {
+            foreach(Window w in Application.Current.Windows)
+            {
+                if(w.GetType()==typeof(MainWindow))
+                {
+                    MainWindow s = (MainWindow)w;
+                    Button btn = (Button)sender;
+                    int uid = Convert.ToInt32(btn.Uid);
+                    s.dobavstr(new DobiRedFilm(dbcl.dbP.Фильмы.FirstOrDefault(x => x.id == uid)),s.i+1);
+                }
+            }
+        }
+
+        private void IzmenSeansClick(object sender, RoutedEventArgs e)
+        {
+            foreach(Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(MainWindow))
+                {
+                    MainWindow s = (MainWindow)w;
+                    Button btn = (Button)sender;
+                    int uid = Convert.ToInt32(btn.Uid);
+                    s.dobavstr(new DobiRedFilm(dbcl.dbP.Залы.FirstOrDefault(x => x.id == uid)), s.i + 1);
+                }
+            }
+        }
     }
 }

@@ -18,16 +18,26 @@
         <StackPanel Orientation="Vertical" Margin="-5,-5,0,10">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5,7,30,0">Название:</TextBlock>
-                <ComboBox  Width="195" Height="36" Foreground="Black" Name="NazvFilm" IsEditable="True" TextBoxBase.TextChanged="TBCBChanged">
+                <ComboBox  Width="195" Height="36" Name="NazvFilm" FontSize="14" IsEditable="True" TextBoxBase.TextChanged="TBCBChanged">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock Margin="30,7,5,0">Ограничение:</TextBlock>
                 <ComboBox Name="CBOgran" Width="70" Height="36" Foreground="Black">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Возраст}" Foreground="Black" Margin="7,0"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -37,32 +47,46 @@
                     <DatePicker x:Name="DPDate" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDate_Changed" Background="Transparent" BorderBrush="Transparent"/>
                 </Grid>
                 <TextBlock Margin="24,7,62,0">Жанр:</TextBlock>
-                <ComboBox Name="CBZhanr" Width="150" Height="36" Foreground="Black" IsEditable="True">
+                <ComboBox Name="CBZhanr" Width="150" Height="36" FontSize="14" IsEditable="True">
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+            <StackPanel Name="SPanelZalCena" Orientation="Horizontal" Margin="0,30,0,0">
                 <TextBlock Margin="5">Зал:</TextBlock>
-                <ComboBox  Width="70" Height="36" Foreground="Black" Name="CBZal">
+                <ComboBox  Width="70" Height="36" Name="CBZal">
+
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding id}" Foreground="Black" Margin="15,0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock Margin="10,7,38,0">Цена:</TextBlock>
                 <TextBox Name="TBCena"></TextBox>
-                <Button Template="{StaticResource but}" Height="30" Margin="60,-10,0,0" Click="SohrClick">
-                    <TextBlock FontSize="19" Margin="7,0,7,0" Foreground="Black">Сохранить</TextBlock></Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="100,7,5,0">Дата Сеанса:</TextBlock>
+            <Button Template="{StaticResource but}" Height="30" Width="120" Margin="390,-37,0,0" Click="SohrClick">
+                <TextBlock FontSize="19" Margin="7,0,7,0" Foreground="Black">Сохранить</TextBlock>
+            </Button>
+            <StackPanel Name="SPanelDate" Orientation="Horizontal">
+                <TextBlock Margin="100,10,5,0">Дата Сеанса:</TextBlock>
                 <Grid>
                     <TextBox  Name="TBDateSeans" Text="{Binding Mode=OneWay, StringFormat='HH:mm dd.MM.yyyy'}"/>
-                    <DatePicker x:Name="DPDateSeans" Margin="165,0,0,0" Width="36" Height="34" TextBoxBase.TextChanged="DPDateSeansChanged" Background="Transparent" BorderBrush="Transparent"/>
+                    <DatePicker x:Name="DPDateSeans" Margin="165,3,0,5" Width="36" Height="34" TextBoxBase.TextChanged="DPDateSeansChanged" Background="Transparent" BorderBrush="Transparent"/>
                 </Grid>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Name="SPanelProdano" Orientation="Horizontal">
                 <TextBlock Margin="110,7,21,0">Продано:</TextBlock>
                 <TextBox Name="TBProdano"></TextBox>
             </StackPanel>

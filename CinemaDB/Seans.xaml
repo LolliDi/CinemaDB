@@ -38,6 +38,9 @@
                                 <TextBlock>Возр. ограничения:</TextBlock>
                                 <TextBlock Text="{Binding Ограничения.Возраст}"/>
                             </StackPanel>
+                            <Button Margin="0,10,0,0" Uid="{Binding id}" Click="IzmenFilmClick" Template="{StaticResource but}" Height="25" Width="150">
+                                <TextBlock Margin="0" Foreground="Black">Изменить фильм</TextBlock>
+                            </Button>
                             <ListView BorderThickness="0" Background="Transparent"  x:Name="LVFilmZal" Uid="{Binding id}" Loaded="InfZalLoaded" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="380" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -46,7 +49,8 @@
                                 </ListView.ItemsPanel>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="Gray" BorderThickness="1">
+                                        <Border BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" >
+
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,-5" HorizontalAlignment="Center">
                                                     <TextBlock FontSize="17">Зал №</TextBlock>
@@ -54,13 +58,13 @@
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,-5">
                                                     <TextBlock>Особенности:</TextBlock>
-                                                        <TextBlock Uid="{Binding Зал}" Loaded="TBInfZal"/>
-                                                    </StackPanel>
+                                                    <TextBlock Uid="{Binding Зал}" Loaded="TBInfZal"/>
+                                                </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,-5">
                                                     <TextBlock>Кол-во мест:</TextBlock>
                                                     <TextBlock Uid="{Binding Зал}" Loaded="TBKolZal"/>
                                                 </StackPanel>
-                                                <ListView BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Name="LVSeansInfo"  Uid="{Binding id}" Loaded="InfSeansLoaded" Width="auto" MaxWidth="300" Height="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                <ListView VerticalAlignment="Top" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Name="LVSeansInfo"  Uid="{Binding id}" Loaded="InfSeansLoaded" Width="auto" MaxWidth="300" Height="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                                     <ListView.ItemsPanel>
                                                         <ItemsPanelTemplate>
                                                             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -77,6 +81,10 @@
                                                                         <TextBlock Foreground="Black">Осталось:</TextBlock>
                                                                         <TextBlock Foreground="Black" Uid="{Binding id}" Loaded="OstalosLoaded"/>
                                                                     </StackPanel>
+                                                                    <Button Margin="0,-2,0,5" Uid="{Binding id}" Click="IzmenSeansClick" Template="{StaticResource but}" Height="25" Width="90">
+                                                                        <TextBlock Margin="0" Foreground="Black">Изменить</TextBlock>
+                                                                    </Button>
+
                                                                 </StackPanel>
                                                             </Border>
                                                         </DataTemplate>
