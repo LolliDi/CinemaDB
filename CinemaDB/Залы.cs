@@ -20,13 +20,7 @@ namespace CinemaDB
         public int Зал { get; set; }
         public int Цена { get; set; }
         public System.DateTime Дата { get; set; }
-
         public int Продано { get; set; }
-
-        public double razn(DateTime t)
-        {
-            return (this.Дата - t).TotalHours;
-        }
         public SolidColorBrush TimeColor
         {
             get

@@ -105,7 +105,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Залы_Сеансы">
-          <End Role="Сеансы" Type="Self.Сеансы" Multiplicity="1" />
+          <End Role="Сеансы" Type="Self.Сеансы" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Залы" Type="Self.Залы" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Сеансы">
@@ -141,7 +143,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Сеансы_Фильмы">
-          <End Role="Фильмы" Type="Self.Фильмы" Multiplicity="1" />
+          <End Role="Фильмы" Type="Self.Фильмы" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Сеансы" Type="Self.Сеансы" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Фильмы">
@@ -386,7 +390,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Залы_Сеансы">
-          <End Type="dbPolzModel.Сеансы" Role="Сеансы" Multiplicity="1" />
+          <End Type="dbPolzModel.Сеансы" Role="Сеансы" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="dbPolzModel.Залы" Role="Залы" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Сеансы">
@@ -434,7 +440,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Сеансы_Фильмы">
-          <End Type="dbPolzModel.Фильмы" Role="Фильмы" Multiplicity="1" />
+          <End Type="dbPolzModel.Фильмы" Role="Фильмы" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="dbPolzModel.Сеансы" Role="Сеансы" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Фильмы">
@@ -445,7 +453,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

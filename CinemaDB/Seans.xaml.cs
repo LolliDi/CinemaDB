@@ -94,5 +94,45 @@ namespace CinemaDB
                 }
             }
         }
+
+        private void UdalSeansClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            int ind = Convert.ToInt32(btn.Uid);
+            Залы udzal = dbcl.dbP.Залы.FirstOrDefault(x => x.id == ind);
+            int idSeans = udzal.Сеанс;
+            dbcl.dbP.Залы.Remove(udzal);
+            dbcl.dbP.SaveChanges();
+            if(dbcl.dbP.Залы.Where(x=>x.Сеанс==idSeans).ToList().Count<1)
+            {
+                dbcl.dbP.Сеансы.Remove(dbcl.dbP.Сеансы.FirstOrDefault(X => X.id == idSeans));
+                dbcl.dbP.SaveChanges();
+            }
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(MainWindow))
+                {
+                    MainWindow s = (MainWindow)w;
+                    s.dobavstr(new Seans(), s.i);
+                }
+            }
+        }
+
+        private void UdalFilmClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            int ind = Convert.ToInt32(btn.Uid);
+            Фильмы udzal = dbcl.dbP.Фильмы.FirstOrDefault(x => x.id == ind);
+            dbcl.dbP.Фильмы.Remove(udzal);
+            dbcl.dbP.SaveChanges();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(MainWindow))
+                {
+                    MainWindow s = (MainWindow)w;
+                    s.dobavstr(new Seans(), s.i);
+                }
+            }
+        }
     }
 }

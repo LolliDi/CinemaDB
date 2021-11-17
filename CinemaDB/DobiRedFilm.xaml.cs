@@ -23,19 +23,28 @@ namespace CinemaDB
     {
         public DobiRedFilm()
         {
+            initial();
+        }
+
+        public void initial()
+        {
             InitializeComponent();
             CBOgran.ItemsSource = dbcl.dbP.Ограничения.ToList();
             CBZhanr.ItemsSource = dbcl.dbP.Жанры.Select(x => x.Жанр).ToList();
             NazvFilm.ItemsSource = dbcl.dbP.Фильмы.Select(x => x.Название).ToList();
             CBZal.ItemsSource = dbcl.dbP.Информация_о_залах.ToList();
-            NazvFilm.Text = "";
+        }
+        public DobiRedFilm(string nazv)
+        {
+            initial();
+            NazvFilm.Text = nazv;
         }
 
         Фильмы newFilm;
         Залы newSeans;
-        public DobiRedFilm(Фильмы film) //для редактирования фильма
+        public DobiRedFilm(Фильмы film) : base() //для редактирования фильма
         {
-            InitializeComponent();
+            initial();
             CBOgran.ItemsSource = dbcl.dbP.Ограничения.ToList();
             CBZhanr.ItemsSource = dbcl.dbP.Жанры.Select(x => x.Жанр).ToList();
             NazvFilm.ItemsSource = dbcl.dbP.Фильмы.Select(x => x.Название).ToList();
@@ -53,7 +62,7 @@ namespace CinemaDB
 
         public DobiRedFilm(Залы Zal) //для редактирования сеанса
         {
-            InitializeComponent();
+            initial();
             CBOgran.ItemsSource = dbcl.dbP.Ограничения.ToList();
             CBZhanr.ItemsSource = dbcl.dbP.Жанры.Select(x => x.Жанр).ToList();
             NazvFilm.ItemsSource = dbcl.dbP.Фильмы.Select(x => x.Название).ToList();
@@ -113,10 +122,19 @@ namespace CinemaDB
             string rez="";
             try
             {
-                
-                string nazv = NazvFilm.Text, ogr = dbcl.dbP.Ограничения.FirstOrDefault(x=>x.id==CBOgran.SelectedIndex+1).Возраст, dateVih = TBDate.Text, zhanr = CBZhanr.Text, zal = (CBZal.SelectedIndex+1).ToString(), cena = TBCena.Text, datSeans = TBDateSeans.Text, prodano = TBProdano.Text;
+                MainWindow s = null;
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w.GetType() == typeof(MainWindow))
+                    {
+                        s = (MainWindow)w;
+                    }
+                }
+                string nazv = NazvFilm.Text, ogr = Convert.ToString(CBOgran.SelectedIndex+1), dateVih = TBDate.Text, zhanr = CBZhanr.Text, zal = (CBZal.SelectedIndex+1).ToString(), cena = TBCena.Text, datSeans = TBDateSeans.Text, prodano = TBProdano.Text;
                 if ((film || (nazv != "" && ogr != "" && dateVih != "" && zhanr != "")) && (!seans || zal != "" && cena != "" && datSeans != "" && prodano != ""))
                 {
+                    int indogr = Convert.ToInt32(ogr);
+                    ogr = dbcl.dbP.Ограничения.FirstOrDefault(x => x.id == indogr).Возраст;
                     Regex form = new Regex(@"\d\d?:\d\d? \d\d?\.\d\d?\.\d\d\d\d");
                     if (!film&&newSeans == null)
                     {
@@ -144,37 +162,27 @@ namespace CinemaDB
                                     return;
                                 }
                             }
+                            Фильмы p = dbcl.dbP.Фильмы.FirstOrDefault(x => x.Название == nazv);
                             
-                            if (newFilm == null)
+                            if (newFilm == null) //если добавляем фильм
                             {
-                                dbcl.dbP.Фильмы.Add(new Фильмы() { Название = nazv, Дата_выхода = DateTime.ParseExact(dateVih, "H:m d.M.yyyy", null), Жанр= idZhanr.id, Возрастные_ограничения = idOgran});
+                                //if (p == null)
+                                {
+                                    dbcl.dbP.Фильмы.Add(new Фильмы() { Название = nazv, Дата_выхода = DateTime.ParseExact(dateVih, "H:m d.M.yyyy", null), Жанр = idZhanr.id, Возрастные_ограничения = idOgran });
+                                }
                             }
-                            else
+                            else //если изменяем
                             {
                                 newFilm.Название = nazv;
                                 newFilm.Дата_выхода = DateTime.ParseExact(dateVih, "H:m d.M.yyyy", null);
                                 newFilm.Жанр = idZhanr.id;
                                 newFilm.Возрастные_ограничения = idOgran;
+                                dbcl.dbP.SaveChanges();
+                                s.dobavstr(new Seans(), s.i - 1); //после изменения возвращаемся к таблице
+                                return;
                             }
                             dbcl.dbP.SaveChanges();
                             rez += "Фильм; ";
-                            MainWindow s = new MainWindow();
-                            foreach (Window w in Application.Current.Windows)
-                            {
-                                if (w.GetType() == typeof(MainWindow))
-                                {
-                                    s = (MainWindow)w;
-                                }
-                            }
-                            if (!seans)
-                            {
-                                s.dobavstr(new Seans(), s.i - 1);
-                                return;
-                            }
-                            else
-                            {
-                                
-                            }
                         }
                         else
                         {
@@ -185,46 +193,45 @@ namespace CinemaDB
                     {
                         throw new Exception("Неверный формат пункта \"Дата сеанса\"!\nВведите дату в следующем формате:\n15:00 01.01.2000");
                     }
-                    if (seans)
+                    if (newFilm == null) //если изменяем/добавляем сеанс
                     {
                         int idZal = Convert.ToInt32(zal);
                         int idFilm = dbcl.dbP.Фильмы.FirstOrDefault(x => x.Название == nazv).id;
                         Сеансы idSeans = dbcl.dbP.Сеансы.FirstOrDefault(x => x.Фильм == idFilm && x.Зал == idZal);
-                        if (idSeans == null)
+                        if (idSeans == null) //если не существует записи о сеансах в данном зале, то добавим
                         {
                             dbcl.dbP.Сеансы.Add(new Сеансы() { Зал = idZal, Фильм = idFilm });
                             dbcl.dbP.SaveChanges();
                             idSeans = dbcl.dbP.Сеансы.FirstOrDefault(x => x.Фильм == idFilm && x.Зал == idZal);
                         }
-
                         DateTime dSeans = new DateTime();
                         dSeans = DateTime.ParseExact(datSeans, "H:m d.M.yyyy", null);
-                        List<Залы> bdzal = new List<Залы>();
-                        List<Залы> prov = new List<Залы>();
-                        if (newSeans != null)
+                        List<Залы> bdzal = new List<Залы>(); //хранит полный список сеансов в зале
+                        List<Залы> prov = new List<Залы>(); //хранит список сеансов, отрыв от которых менее трех часов
+                        if (newSeans != null) //если изменяем сеанс, то берем в расчет ид текущего
                         {
                             bdzal = dbcl.dbP.Залы.Where(x => x.Сеанс == newSeans.Сеанс).ToList();
                             prov = bdzal.Where(x => (Math.Abs((x.Дата - dSeans).TotalHours) < 3) && x.id != newSeans.id).ToList();
                         }
-                        else
+                        else //иначе берем все
                         {
                             bdzal = dbcl.dbP.Залы.Where(x => x.Сеанс== idSeans.id).ToList();
                             prov = bdzal.Where(x => Math.Abs((x.Дата - dSeans).TotalHours) < 3).ToList();
                         }
-                        if (prov.Count>0)
+                        if (prov.Count>0) //если есть сеансы, расстояние от которых менее 3х часов, то создаем ошибку и пишем какие это сеансы
                         {
-                            string otv = "В пределах трех часов до/после данного сеанса уже идет фильм в выбранном зале.\nПопробуйте поменять время!\nМешающие сеансы:\n";
-                            foreach(Залы s in prov)
+                            string otv = "В пределах трех часов до/после данного сеанса уже идет фильм в выбранном зале. Попробуйте поменять время!\nМешающие сеансы:\n";
+                            foreach(Залы z in prov)
                             {
-                                otv += "Фильм: " + s.Сеансы.Фильмы.Название + "; Время: " + s.Дата.ToString("HH:mm dd.MM.yyyy")+"\n";
+                                otv += "Фильм: " + z.Сеансы.Фильмы.Название + "; Время: " + z.Дата.ToString("HH:mm dd.MM.yyyy")+"\n";
                             }
                             throw new Exception(otv);
                         }
-                        if (newSeans == null)
+                        if (newSeans == null) //если добавляем сеанс
                         {
                             dbcl.dbP.Залы.Add(new Залы() { Сеанс = idSeans.id, Зал = idZal, Цена = Convert.ToInt32(cena), Дата = dSeans, Продано = Convert.ToInt32(prodano) });
                         }
-                        else
+                        else //если изменяем
                         {
                             newSeans.Сеанс = idSeans.id;
                             newSeans.Зал = idZal;
@@ -232,9 +239,21 @@ namespace CinemaDB
                             newSeans.Дата = dSeans;
                             newSeans.Продано = Convert.ToInt32(prodano);
                         }
-                            dbcl.dbP.SaveChanges();
-                        rez += "Сеанс - успешно добавлено/изменено!";
-                        MessageBox.Show(rez, "Успешно!");
+                        dbcl.dbP.SaveChanges();
+                        rez += "Сеанс - успешно добавлено/изменено!\n";
+                        MessageBoxResult res = MessageBox.Show(rez + "Хотите перейти в базу?\nДа - перейти\nНет - отчистить поля\nНазад - оставить всё как есть", "Выполнено!", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+                        switch(res)
+                        {
+                            case MessageBoxResult.Yes:
+                                s.dobavstr(new Seans(), s.i-1);
+                                break;
+                            case MessageBoxResult.No:
+                                s.dobavstr(new DobiRedFilm(), s.i);
+                                break;
+                            default:
+                                s.dobavstr(new DobiRedFilm(nazv), s.i);
+                                break;
+                        }
                     }
                 }
                 else

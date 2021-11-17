@@ -41,6 +41,9 @@
                             <Button Margin="0,10,0,0" Uid="{Binding id}" Click="IzmenFilmClick" Template="{StaticResource but}" Height="25" Width="150">
                                 <TextBlock Margin="0" Foreground="Black">Изменить фильм</TextBlock>
                             </Button>
+                            <Button Margin="0,2,0,0" Uid="{Binding id}" Click="UdalFilmClick" Template="{StaticResource but}" Height="25" Width="135">
+                                <TextBlock Margin="0" Foreground="Black">Удалить фильм</TextBlock>
+                            </Button>
                             <ListView BorderThickness="0" Background="Transparent"  x:Name="LVFilmZal" Uid="{Binding id}" Loaded="InfZalLoaded" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="380" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -84,7 +87,9 @@
                                                                     <Button Margin="0,-2,0,5" Uid="{Binding id}" Click="IzmenSeansClick" Template="{StaticResource but}" Height="25" Width="90">
                                                                         <TextBlock Margin="0" Foreground="Black">Изменить</TextBlock>
                                                                     </Button>
-
+                                                                    <Button Margin="0,-2,0,5" Uid="{Binding id}" Click="UdalSeansClick" Template="{StaticResource but}" Height="25" Width="80">
+                                                                        <TextBlock Margin="0" Foreground="Black">Удалить</TextBlock>
+                                                                    </Button>
                                                                 </StackPanel>
                                                             </Border>
                                                         </DataTemplate>
