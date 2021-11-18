@@ -171,7 +171,7 @@ Title="MainWindow"
             </TextBlock.RenderTransform>
             <TextBlock.ToolTip>
                 <ToolTip>
-                    <TextBlock Foreground="Black">
+                    <TextBlock Foreground="Black" TextAlignment="Left">
                         <Run Text="Админ акк - Логин: LolliDi Пароль: Lolli-345"/>
                         <LineBreak/>
                         <Run Text="Изменил размер, вроде всё подогнал под новый"/>
@@ -191,16 +191,18 @@ Title="MainWindow"
             <TextBlock.ToolTip>
                 <ToolTip >
                     
-                    <TextBlock Foreground="Black">
+                    <TextBlock Foreground="Black" TextAlignment="Left">
                         <Run Text="Изменил размер, поменял расположение элементов, чтобы всё соответствовало"/>
                         <LineBreak/>
                         <Run Text="Добавление/изменение/удаление фильмов и сеансов, можно даже отдельно"/>
                         <LineBreak/>
                         <Run Text="Запись о зале в фильме удаляется, если не осталось сеансов"/>
                         <LineBreak/>
+                        <Run Text="При добавлении фильма, выбрав существующий - будут добавляться для него сеансы"/>
+                        <LineBreak/>
                         <Run Text="Можно добавлять новые жанры просто вписав его в комбобокс с жанром и сохранив фильм"/>
                         <LineBreak/>
-                        <Run Text="Нельзя вводить символы в поня с ценой и продаными билетами"/>
+                        <Run Text="Нельзя вводить символы в поля с ценой и продаными билетами"/>
                         <LineBreak/>
                         <Run Text="Количество проданых мест не может быть больше количества мест в зале"/>
                         <LineBreak/>
