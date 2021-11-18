@@ -15,7 +15,7 @@
             </TextBlock.Effect>
             Добавление данных
         </TextBlock>
-        <StackPanel Orientation="Vertical" Margin="-5,100,0,10">
+        <StackPanel Orientation="Vertical" Margin="10,65,0,10">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5,7,30,0">Название:</TextBlock>
                 <ComboBox  Width="195" Height="36" Name="NazvFilm" FontSize="14" IsEditable="True" TextBoxBase.TextChanged="TBCBChanged">
@@ -74,11 +74,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock Margin="10,7,38,0">Цена:</TextBlock>
-                <TextBox Name="TBCena"></TextBox>
+                <TextBox Name="TBCena" TextChanged="TBCenaTextChanged"></TextBox>
             </StackPanel>
-            <Button Template="{StaticResource but}" Height="30" Width="120" Margin="390,-37,0,0" Click="SohrClick">
-                <TextBlock FontSize="19" Margin="7,0,7,0" Foreground="Black">Сохранить</TextBlock>
-            </Button>
+            
             <StackPanel Name="SPanelDate" Orientation="Horizontal">
                 <TextBlock Margin="100,10,5,0">Дата Сеанса:</TextBlock>
                 <Grid>
@@ -86,10 +84,14 @@
                     <DatePicker x:Name="DPDateSeans" Margin="165,3,0,5" Width="36" Height="34" TextBoxBase.TextChanged="DPDateSeansChanged" Background="Transparent" BorderBrush="Transparent"/>
                 </Grid>
             </StackPanel>
+            <Button Template="{StaticResource but}" Height="30" Width="120" Margin="400,-47,0,0" Click="SohrClick">
+                <TextBlock FontSize="19" Margin="7,0,7,0" Foreground="Black">Сохранить</TextBlock>
+            </Button>
             <StackPanel Name="SPanelProdano" Orientation="Horizontal">
                 <TextBlock Margin="110,7,21,0">Продано:</TextBlock>
-                <TextBox Name="TBProdano"></TextBox>
+                <TextBox Name="TBProdano" TextChanged="TBProdanoTextChanged"></TextBox>
             </StackPanel>
+            
         </StackPanel>
     </Grid>
 </Page>

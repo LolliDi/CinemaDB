@@ -12,7 +12,7 @@ Title="MainWindow"
         Icon="Images/logo.png"
         MouseLeftButtonDown="WindowMouseLeftButtonDown">
     <Grid Margin="0,10,0,0">
-        <Path Stroke="#0B1538" StrokeThickness="2" SnapsToDevicePixels="True" Margin="11.092,304.673,192.755,106.481" Stretch="Fill">
+        <Path Stroke="#0B1538" StrokeThickness="2" SnapsToDevicePixels="True" Margin="0.638,304.731,203.209,154.116" Stretch="Fill">
             <Path.Fill>
                 <SolidColorBrush Color="#3e5769"/>
             </Path.Fill>
@@ -46,7 +46,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path SnapsToDevicePixels="True" Margin="189.776,282.514,476.573,399.362" Stretch="Fill">
+        <Path SnapsToDevicePixels="True" Margin="179.332,282.51,482.68,399.366" Stretch="Fill">
             <Path.Fill>
                 <SolidColorBrush Color="Black"/>
             </Path.Fill>
@@ -71,7 +71,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="Black" StrokeThickness="5" SnapsToDevicePixels="True" Margin="52.023,27.467,305.285,462.407" Stretch="Fill">
+        <Path Stroke="Black" StrokeThickness="5" SnapsToDevicePixels="True" Margin="41.523,27.467,315.785,462.407" Stretch="Fill">
             <Path.Fill>
                 <SolidColorBrush Color="#3e5769"/>
             </Path.Fill>
@@ -87,7 +87,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path  SnapsToDevicePixels="True" Margin="102.058,78.257,334.097,488.864" Stretch="Fill">
+        <Path  SnapsToDevicePixels="True" Margin="91.558,78.257,344.597,488.864" Stretch="Fill">
             <Path.Fill>
                 <SolidColorBrush Color="#f2e8c9"/>
             </Path.Fill>
@@ -102,7 +102,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="128.077,110.13,357.564,500.639" Stretch="Fill">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="117.577,110.13,368.064,500.639" Stretch="Fill">
             <Path.Fill>
                 <SolidColorBrush Color="Black"/>
             </Path.Fill>
@@ -127,7 +127,7 @@ Title="MainWindow"
 
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="4.042,54.333,-4.042,-54.333">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="-6.458,54.333,6.458,-54.333">
             <Path.Fill>
                 <SolidColorBrush Color="#f9b84d"/>
             </Path.Fill>
@@ -141,7 +141,7 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="5.333,53.833,-5.333,-53.833">
+        <Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True" Margin="-5.167,53.833,5.167,-53.833">
             <Path.Fill>
                 <SolidColorBrush Color="#ff7058"/>
             </Path.Fill>
@@ -155,26 +155,12 @@ Title="MainWindow"
             </Path.RenderTransform>
         </Path>
 
-        <Path SnapsToDevicePixels="True" Margin="14.333,149.167,-14.333,-149.167">
-            <Path.Fill>
-                <SolidColorBrush Color="DarkGray"/>
-            </Path.Fill>
-            <Path.Data>
-                <GeometryGroup>
-                    <RectangleGeometry Rect="405,380 140,65" RadiusX="5" RadiusY="5" />
-                </GeometryGroup>
-            </Path.Data>
-            <Path.RenderTransform>
-                <ScaleTransform ScaleX="1.3" ScaleY="1.3"></ScaleTransform>
-            </Path.RenderTransform>
-        </Path>
-
-        <TextBlock Panel.ZIndex="100" Text="(?) Инфо (?)" Width="115" Margin="-19,421,754,295" Foreground="Black" RenderTransformOrigin="0.5,0.5">
+        <TextBlock Panel.ZIndex="150" Text="(?) Инфо (?)" Width="115" Margin="-30,400,765,316" Foreground="Black" RenderTransformOrigin="0.5,0.5">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="75.301"/>
+                    <RotateTransform Angle="71.979"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBlock.RenderTransform>
@@ -183,42 +169,48 @@ Title="MainWindow"
                     <TextBlock Foreground="Black">
                         <Run Text="Админ акк - Логин: LolliDi Пароль: Lolli-345"/>
                         <LineBreak/>
-                        <Run Text="Если написать свой гендер в комбобокс 'Пол', то он добавится в БД"/>
-
+                        <Run Text="Изменил размер, вроде всё подогнал под новый"/>
+                        <LineBreak/>
+                        <Run Text="Тестил сейчас мало, т.к. я выгорел, но всё должно работать"/>
+                        <LineBreak/>
+                        <Run Text="Все ваши пожелания по предыдущим заданиям учтены"/>
+                        <LineBreak/>
+                        <Run Text="zindex для listview не работает, когда приду в себя -"/>
+                        <LineBreak/>
+                        <Run Text="попробую запретить фокусироваться на элементах, но не сейчас"/>
                     </TextBlock>
                 </ToolTip>
             </TextBlock.ToolTip>
             </TextBlock>
 
-        <TextBlock Text="Кинотеатр" FontSize="70" Margin="268,-20,80,483">
+        <TextBlock Text="Кинотеатр" FontSize="70" Margin="258,-20,90,483">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
         </TextBlock>
-        <Image Source="Images\logo.png"  Margin="480,68,280,444"/>
-        <Button Name="BtnVhod" Click="VhodClick" Height="24" Width="70" Margin="756,442,24,286" Template="{StaticResource but}">
+        <Image Source="Images\logo.png"  Margin="464,132,296,516"/>
+        <Button Name="BtnVhod" Click="VhodClick" Height="24" Width="70" Margin="748,417,32,311" Template="{StaticResource but}">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Вход</TextBlock>
         </Button>
-        <Button Name="BtnReg" Margin="738,473,7,255" Width="105" Height="24" Template="{StaticResource but}" Click="RegistrClick">
+        <Button Name="BtnReg" Margin="730,448,15,280" Width="105" Height="24" Template="{StaticResource but}" Click="RegistrClick">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Регистрация</TextBlock>
         </Button>
-        <TextBlock FontSize="17" Width="130" Margin="567,646,153,50"><Run>Перемещение</Run><LineBreak/><Run>по окнам</Run></TextBlock>
-        <Button Name="BNaz" Click="nazClick" Height="24" Width="40" Margin="552,696,258,32" Template="{StaticResource but}" Panel.ZIndex="150">
+        <Button Name="BNaz" Click="nazClick" Height="24" Width="40" Margin="288,317,522,411" Template="{StaticResource but}" Panel.ZIndex="150">
             <TextBlock Foreground="Black" FontSize="25" Margin="0,-9"> &lt;&lt;</TextBlock>
         </Button>
-        <Button Name="BVper" Click="vperClick" Height="24" Width="40" Margin="672,696,138,32" FontSize="20" Template="{StaticResource but}" Panel.ZIndex="150">
+        <Button Name="BVper" Click="vperClick" Height="24" Width="40" Margin="353,317,457,411" FontSize="20" Template="{StaticResource but}" Panel.ZIndex="150">
             <TextBlock Foreground="Black" FontSize="25" Margin="0,-8,0,-10"> &gt;&gt;</TextBlock>
         </Button>
-        <Button Width="27" Background="#ff7058" Template="{StaticResource buclose}" Margin="700,313,123,411" Click="CloseClick">
+        <Button Width="27" Background="#ff7058" Template="{StaticResource buclose}" Margin="690,313,133,411" Click="CloseClick" Panel.ZIndex="150">
             <TextBlock FontWeight="Bold" FontSize="20" Foreground="Black" Margin="0,-4,0,-8">x</TextBlock>
         </Button>
-        <Button Background="#f9b84d" Template="{StaticResource buclose}" Margin="666,313,156,411" Click="HideClick" Panel.ZIndex="150">
+        <Button Background="#f9b84d" Template="{StaticResource buclose}" Margin="656,313,166,411" Click="HideClick" Panel.ZIndex="150">
             <TextBlock FontWeight="Bold" FontSize="35" Foreground="Black" Margin="0,-17,0,-8">-</TextBlock>
         </Button>
-        <Button Name="BtnVihod" Click="VihodClick" Height="24" Width="70" Margin="756,504,24,224" Template="{StaticResource but}" IsEnabled="False">
+        <Button Name="BtnVihod" Click="VihodClick" Height="24" Width="70" Margin="748,479,32,249" Template="{StaticResource but}" IsEnabled="False">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Выход</TextBlock>
         </Button>
-        <Frame Name="FrameStr" NavigationUIVisibility="Hidden" Margin="123,341,112,15">
+        <Frame Name="FrameStr" NavigationUIVisibility="Hidden" Margin="100,341,122,71">
         </Frame>
     </Grid>
 </Window>

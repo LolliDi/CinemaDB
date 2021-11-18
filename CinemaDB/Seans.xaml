@@ -15,7 +15,8 @@
             </TextBlock.Effect>
             Сеансы
         </TextBlock>
-        <ListView BorderThickness="0" Margin="-20,20,-5,90" Background="Transparent" x:Name="LVFilm" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Panel.ZIndex="1000" ScrollViewer.PanningMode="VerticalOnly">
+        <ListView BorderThickness="0" Margin="-7,20,-8,-7" Background="Transparent" x:Name="LVFilm" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Panel.ZIndex="1000" ScrollViewer.PanningMode="VerticalOnly">
+
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel HorizontalAlignment="Center"/>
@@ -24,6 +25,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8">
+                        
+                        
                         <StackPanel Orientation="Vertical" >
                             <TextBlock Text="{Binding Название}" FontSize="23"/>
                             <StackPanel Orientation="Horizontal" Margin="15,-8">
@@ -52,8 +55,17 @@
                                 </ListView.ItemsPanel>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Top" >
-
+                                        <Border  BorderThickness="1" VerticalAlignment="Top" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                    <GradientBrush.GradientStops>
+                                                        <GradientStopCollection>
+                                                            <GradientStop Color="Gray" Offset="0"></GradientStop>
+                                                            <GradientStop Color="Transparent" Offset="1"></GradientStop>
+                                                        </GradientStopCollection>
+                                                    </GradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
                                             <StackPanel Orientation="Vertical">
                                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,-5" HorizontalAlignment="Center">
                                                     <TextBlock FontSize="17">Зал №</TextBlock>
@@ -75,7 +87,17 @@
                                                     </ListView.ItemsPanel>
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
-                                                            <Border BorderBrush="Gray" BorderThickness="1" Background="{Binding TimeColor}">
+                                                            <Border BorderThickness="1" Background="{Binding TimeColor}" CornerRadius="10">
+                                                                <Border.BorderBrush>
+                                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                                        <GradientBrush.GradientStops>
+                                                                            <GradientStopCollection>
+                                                                                <GradientStop Color="Gray" Offset="0"></GradientStop>
+                                                                                <GradientStop Color="Transparent" Offset="0.5"></GradientStop>
+                                                                            </GradientStopCollection>
+                                                                        </GradientBrush.GradientStops>
+                                                                    </LinearGradientBrush>
+                                                                </Border.BorderBrush>
                                                                 <StackPanel HorizontalAlignment="Left">
                                                                     <TextBlock Foreground="Black" Text="{Binding Дата,StringFormat={}{0:HH:mm dd.MM.yyyy}}" Margin="5,0,5,0"/>
                                                                     <TextBlock Foreground="Black" Text="{Binding Cena}" Margin="5,0,5,0"/>
