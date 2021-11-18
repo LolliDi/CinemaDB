@@ -9,13 +9,13 @@
       Title="DobiRedFilm">
 
     <Grid>
-        <TextBlock FontSize="35" Margin="-410,-295,20,0" Name ="Zag">
+        <TextBlock FontSize="35" Margin="-470,-255,20,0" Name ="Zag">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
             Добавление данных
         </TextBlock>
-        <StackPanel Orientation="Vertical" Margin="-5,-5,0,10">
+        <StackPanel Orientation="Vertical" Margin="-5,100,0,10">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="5,7,30,0">Название:</TextBlock>
                 <ComboBox  Width="195" Height="36" Name="NazvFilm" FontSize="14" IsEditable="True" TextBoxBase.TextChanged="TBCBChanged">

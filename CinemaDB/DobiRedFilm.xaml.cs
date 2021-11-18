@@ -183,6 +183,7 @@ namespace CinemaDB
                             }
                             dbcl.dbP.SaveChanges();
                             rez += "Фильм; ";
+                            film = true;
                         }
                         else
                         {

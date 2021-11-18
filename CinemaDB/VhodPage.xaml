@@ -9,14 +9,14 @@
       Title="VhodPage">
 
     <Grid>
-        <TextBlock FontSize="35" Margin="-410,-295,20,0">
+        <TextBlock FontSize="35" Margin="-470,-255,20,0">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
             Авторизация
         </TextBlock>
         <StackPanel Margin="20,30,0,0">
-        <StackPanel Orientation="Horizontal" >
+        <StackPanel Orientation="Horizontal" Margin="0,110,0,0">
             <TextBlock FontSize="15">Введите логин:</TextBlock>
             <TextBox Name="VhodLogin" Margin="10,0,0,5"></TextBox>
         </StackPanel>

@@ -10,13 +10,13 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <TextBlock FontSize="35" Margin="-400,-295,20,0">
+            <TextBlock FontSize="35" Margin="-470,-255,20,0">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Gray" BlurRadius="5"/>
                 </TextBlock.Effect>
             Регистрация
             </TextBlock>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="0,100,0,0">
                 <TextBlock>Имя:</TextBlock>
                 <TextBox Name="RegName" Margin="64,0,0,5"></TextBox>
                 <TextBlock Margin="55,0,2,0">Пол:</TextBlock>
