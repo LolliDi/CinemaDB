@@ -1,0 +1,61 @@
+﻿<Window x:Class="CinemaDB.RedactProfil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CinemaDB"
+        mc:Ignorable="d"
+        Title="Редактирование профиля" Height="270" Width="381" WindowStartupLocation="CenterScreen"  Icon="Images/logo.png" BorderBrush="#3e5769" ResizeMode="NoResize">
+    <Grid Background="#3e5769">
+        <StackPanel Margin="10">
+            <StackPanel Name="SPPolz" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,40,10">Имя:</TextBlock>
+                    <TextBox Name="TBName"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,5,10">Фамилия:</TextBlock>
+                    <TextBox Name="TBFam"></TextBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Name="SPParol" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,5,10">Текущий пароль:</TextBlock>
+                    <PasswordBox Name="TekParol" ></PasswordBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,20,10">Новый пароль:</TextBlock>
+                    <PasswordBox x:Name="NewParol"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,47,10">Повторите:</TextBlock>
+                    <PasswordBox Name="NewParolPovt"></PasswordBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Name="SPLog" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,5,10">Новый логин:</TextBlock>
+                    <TextBox Name="TBLog"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,10,47,10">Пароль:</TextBlock>
+                    <PasswordBox x:Name="PBParol" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel>
+                <Button Click="BtnSohrClick" Template="{StaticResource but}" Width="100" Margin="0,2.5">
+                    <TextBlock Text="Сохранить" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+                </Button>
+                <Button Name="BtnPar" Click="BtnRedactPasClick" Template="{StaticResource but}" Width="150" Margin="0,2.5">
+                <TextBlock Text="Изменить пароль" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+            </Button>
+                <Button Name="BtnLog" Click="BtnRedactLogClick" Template="{StaticResource but}" Width="140" Margin="0,2.5">
+                <TextBlock Text="Изменить логин" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+            </Button>
+                <Button Name="BtnProf" Click="BtnRedactProfClick" Template="{StaticResource but}" Width="165" Margin="0,2.5" Visibility="Collapsed">
+                    <TextBlock Text="Изменить профиль" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

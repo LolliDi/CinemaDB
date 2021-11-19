@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CinemaDB
 {
@@ -20,47 +8,39 @@ namespace CinemaDB
     /// </summary>
     public partial class AdmMainPage : Page
     {
-        public AdmMainPage()
+        Пользователи tek;
+        MainWindow c = null;
+        public AdmMainPage(Пользователи tek)
         {
             InitializeComponent();
-        }
-
-        private void InfPolzClick(object sender, RoutedEventArgs e)
-        {
+            this.tek = tek;
             foreach (Window window in Application.Current.Windows) //поиск окна
             {
                 if (window.GetType() == typeof(MainWindow))
                 {
-                    MainWindow ci = (MainWindow)window;
-                    ci.dobavstr(new AdmDannieOPolzPage(), ci.i+1);
-                    break;
+                    c = (MainWindow)window;
                 }
             }
+        }
+
+        private void InfPolzClick(object sender, RoutedEventArgs e)
+        {
+            c.dobavstr(new AdmDannieOPolzPage(), c.i + 1);
         }
 
         private void InfFilmClick(object sender, RoutedEventArgs e)
         {
-            foreach(Window window in Application.Current.Windows)
-            {
-                if(window.GetType()==typeof(MainWindow))
-                {
-                    MainWindow c = (MainWindow)window;
-                    c.dobavstr(new Seans(), c.i + 1);
-                    break;
-                }
-            }    
+            c.dobavstr(new Seans(), c.i + 1);
         }
 
         private void DobPolzClick(object sender, RoutedEventArgs e)
         {
-            foreach(Window window in Application.Current.Windows)
-            {
-                if(window.GetType()==typeof(MainWindow))
-                {
-                    MainWindow c = (MainWindow)window;
-                    c.dobavstr(new DobiRedFilm(), c.i + 1);
-                }
-            }
+            c.dobavstr(new DobiRedFilm(), c.i + 1);
+        }
+
+        private void KabinetClick(object sender, RoutedEventArgs e)
+        {
+            c.dobavstr(new Kabinet(tek), c.i + 1);
         }
     }
 }

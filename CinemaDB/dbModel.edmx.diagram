@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="012afe5f35a84b5fb583393c9165b326" Name="Diagram1">
+      <Diagram DiagramId="012afe5f35a84b5fb583393c9165b326" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="dbPolzModel.Жанры" Width="1.5" PointX="0.75" PointY="5.375" />
         <EntityTypeShape EntityType="dbPolzModel.Залы" Width="1.5" PointX="7.5" PointY="1" />
         <EntityTypeShape EntityType="dbPolzModel.Информация_о_залах" Width="1.5" PointX="5.25" PointY="5.375" />
         <EntityTypeShape EntityType="dbPolzModel.Ограничения" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="dbPolzModel.Пол" Width="1.5" PointX="7.75" PointY="8.625" />
+        <EntityTypeShape EntityType="dbPolzModel.Пол" Width="1.5" PointX="7.75" PointY="5.625" />
         <EntityTypeShape EntityType="dbPolzModel.Пользователи" Width="1.5" PointX="10" PointY="5" />
-        <EntityTypeShape EntityType="dbPolzModel.Роли" Width="1.5" PointX="7.75" PointY="5.625" />
+        <EntityTypeShape EntityType="dbPolzModel.Роли" Width="1.5" PointX="7.75" PointY="8.625" />
         <EntityTypeShape EntityType="dbPolzModel.Сеансы" Width="1.5" PointX="5.25" PointY="1.25" />
         <EntityTypeShape EntityType="dbPolzModel.Фильмы" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="dbPolzModel.Фото" Width="1.5" PointX="12.25" PointY="5.5" />

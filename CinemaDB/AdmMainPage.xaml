@@ -9,20 +9,23 @@
       Title="AdmMainPage">
 
     <Grid>
-        <TextBlock FontSize="35" Margin="-470,-255,20,0">
+        <TextBlock FontSize="35" Margin="-460,-235,20,0">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
             Адм. Меню
         </TextBlock>
-        <Button Width="250" Template="{StaticResource ResourceKey=but}" Margin="-170,-70,0,0" Height="30" Click="InfPolzClick">
+        <Button Width="250" Template="{StaticResource ResourceKey=but}" Margin="0,-140,0,0" Height="30" Click="InfPolzClick">
             <TextBlock Foreground="Black" Margin="0,2">Информация о пользователях</TextBlock>
         </Button>
-        <Button Template="{StaticResource ResourceKey=but}" Width="75" Margin="-160,0,0,0" Height="30" Click="InfFilmClick">
+        <Button Template="{StaticResource ResourceKey=but}" Width="75" Margin="0,-70,0,0" Height="30" Click="InfFilmClick">
             <TextBlock Foreground="Black" Margin="0,2"><Run Text="Сеансы"/></TextBlock>
         </Button>
-        <Button Template="{StaticResource ResourceKey=but}" Margin="-160,70,0,0" Height="30" Width="160" Click="DobPolzClick">
+        <Button Template="{StaticResource ResourceKey=but}" Margin="0,0,0,0" Height="30" Width="160" Click="DobPolzClick">
             <TextBlock Foreground="Black" Margin="0,2"><Run Text="Добавить фильмы"/></TextBlock>
+        </Button>
+        <Button Template="{StaticResource ResourceKey=but}" Margin="0,70,0,0" Height="30" Width="90" Click="KabinetClick">
+            <TextBlock Foreground="Black" Margin="0,2"><Run Text="Кабинет"/></TextBlock>
         </Button>
     </Grid>
 </Page>

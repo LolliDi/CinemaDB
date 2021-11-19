@@ -88,7 +88,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Путь" Type="nvarchar" MaxLength="150" />
-          <Property Name="Изображение" Type="binary" MaxLength="8000" />
+          <Property Name="Изображение" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Залы_Информация о залах">
           <End Role="Информация о залах" Type="Self.Информация о залах" Multiplicity="1" />
@@ -380,7 +380,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Путь" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Изображение" Type="Binary" MaxLength="8000" FixedLength="true" />
+          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Пользователи" Relationship="dbPolzModel.FK_Фото_Пользователи" FromRole="Фото" ToRole="Пользователи" />
         </EntityType>
         <Association Name="FK_Фильмы_Жанры">

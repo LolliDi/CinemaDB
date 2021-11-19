@@ -86,8 +86,8 @@
     <Compile Include="Kabinet.xaml.cs">
       <DependentUpon>Kabinet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PolzMainPage.xaml.cs">
-      <DependentUpon>PolzMainPage.xaml</DependentUpon>
+    <Compile Include="RedactProfil.xaml.cs">
+      <DependentUpon>RedactProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegPage.xaml.cs">
       <DependentUpon>RegPage.xaml</DependentUpon>
@@ -166,7 +166,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PolzMainPage.xaml">
+    <Page Include="RedactProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

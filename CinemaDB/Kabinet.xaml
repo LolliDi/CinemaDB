@@ -3,13 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CinemaDB"
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Kabinet">
 
     <Grid>
-        <TextBlock FontSize="35" Margin="-470,-255,20,0">
+        <TextBlock FontSize="35" Margin="-460,-235,20,0">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
@@ -18,7 +18,7 @@
         <StackPanel Orientation="Horizontal" Margin="70,70,0,0">
             <StackPanel Orientation="Vertical">
                 <Image Name="Photo" Source="Images/noavatar.png" Stretch="Fill" Width="100" Height="130" VerticalAlignment="Top"/>
-                <Button Name="BtnRedactPhoto" Click="BtnRedactPhotoClick" Template="{StaticResource but}" Width="130" Margin="0,5">
+                <Button Name="BtnRedactPhoto" Click="BtnRedactPhotoClick" Template="{StaticResource but}" Width="140" Margin="0,5">
                     <TextBlock Text="Изменить фото" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
                 </Button>
             </StackPanel>
@@ -29,12 +29,6 @@
                 <TextBlock Name="TBRol" Text="Роль" HorizontalAlignment="Left"/>
                 <Button Name="BtnRedact" Click="BtnRedactClick" Template="{StaticResource but}" Width="130">
                     <TextBlock Text="Редактировать" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
-                </Button>
-                <Button Name="BtnRedactPas" Click="BtnRedactPasClick" Template="{StaticResource but}" Width="150" Margin="0,5">
-                    <TextBlock Text="Изменить пароль" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
-                </Button>
-                <Button Name="BtnRedactLog" Click="BtnRedactLogClick" Template="{StaticResource but}" Width="140">
-                    <TextBlock Text="Изменить логин" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
                 </Button>
             </StackPanel>
         </StackPanel>

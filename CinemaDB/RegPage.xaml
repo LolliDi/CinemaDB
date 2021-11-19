@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <TextBlock FontSize="35" Margin="-470,-255,20,0">
+            <TextBlock FontSize="35" Margin="-460,-235,20,0">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="Gray" BlurRadius="5"/>
                 </TextBlock.Effect>

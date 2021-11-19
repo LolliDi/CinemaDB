@@ -1,20 +1,9 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CinemaDB
 {
@@ -56,17 +45,9 @@ namespace CinemaDB
         }
         private void BtnRedactClick(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void BtnRedactPasClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnRedactLogClick(object sender, RoutedEventArgs e)
-        {
-
+            RedactProfil p = new RedactProfil(tek);
+            p.ShowDialog();
+            obnovInfo();
         }
 
         private void BtnRedactPhotoClick(object sender, RoutedEventArgs e)
@@ -78,16 +59,15 @@ namespace CinemaDB
             System.Drawing.Image SDI = System.Drawing.Image.FromFile(path);
             ImageConverter ic = new ImageConverter();
             byte[] bytePhoto = (byte[])ic.ConvertTo(SDI, typeof(byte[]));
-            if (photo==null)
+            if (photo == null)
             {
-                dbcl.dbP.Фото.Add(new Фото() { id = tek.id, Путь=null, Изображение = bytePhoto });
-                dbcl.dbP.SaveChanges();
+                dbcl.dbP.Фото.Add(new Фото() { id = tek.id, Путь = null, Изображение = bytePhoto });
             }
             else
             {
                 photo.Изображение = bytePhoto;
-                dbcl.dbP.SaveChanges();
             }
+            dbcl.dbP.SaveChanges();
 
             obnovInfo();
         }

@@ -9,7 +9,7 @@
       Title="DobiRedFilm">
 
     <Grid>
-        <TextBlock FontSize="35" Margin="-470,-255,20,0" Name ="Zag">
+        <TextBlock FontSize="35" Margin="-460,-235,20,0" Name ="Zag">
             <TextBlock.Effect>
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>

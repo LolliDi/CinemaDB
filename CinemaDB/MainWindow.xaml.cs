@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -23,7 +25,34 @@ namespace CinemaDB
             dbcl.dbP = new dbEntities();
             ClFrame.Fr = FrameStr;
             dobavstr(new VhodPage(), i);
+            Thread time = new Thread(STime) { IsBackground = true }; //создание потока
+            time.Start(); //запуск
+
         }
+
+        private void STime() //поток с часами
+        {
+            DateTime d;
+            while (true)
+            {
+                using (var client = new HttpClient()) //используем запросы в интернетике
+                {
+                    try
+                    {
+                        var result = client.GetAsync("https://time100.ru/",
+                              HttpCompletionOption.ResponseHeadersRead).Result; //получение заголовков сайта
+                        d = result.Headers.Date.Value.LocalDateTime; //вытягиваем из заголовка дату для нашего региона
+                    }
+                    catch //если произошла ошибка или пропало соединение - будем получать время с компа
+                    {
+                        d = DateTime.Now;
+                    }
+                    Dispatcher.Invoke(() => { TBTime.Text = d.ToString("HH:mm:ss\ndd.MM.yyyy"); }); //отправляем в очередь диспетчера обновления приложения изменение вывода времени
+                    Thread.Sleep(1000);
+                }
+            }
+        }
+
         private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перемещение окна мышкой
         {
             DragMove();
@@ -79,7 +108,6 @@ namespace CinemaDB
             prover();
         }
 
-
         private void vperClick(object sender, RoutedEventArgs e)
         {
             pereh(i + 1);
@@ -115,7 +143,7 @@ namespace CinemaDB
                     if (StrB.Matches(pas).Count < 3) strParol += "Должно быть минимум три строчных латинских букв\n";
                     if (Cifr.Matches(pas).Count < 2) strParol += "Должно быть не менее двух цифр\n";
                     if (Spec.Matches(pas).Count < 1) strParol += "Должно быть не менее одного спецсимвола\n";
-                    if(pas.Length<8) strParol += "Длинна пароля должна быть не менее восьми символов\n";
+                    if (pas.Length < 8) strParol += "Длинна пароля должна быть не менее восьми символов\n";
                     if (strParol == "")
                         if (pas == f.RegParolPovt.Password)
                         {
@@ -123,14 +151,14 @@ namespace CinemaDB
                             Роли r = dbcl.dbP.Роли.FirstOrDefault(x => x.Роль == rol);
                             if (p == null) //если такого гендера нет, то добавим его :)
                             {
-                                dbcl.dbP.Пол.Add(new Пол(){Пол1 = pol}); 
+                                dbcl.dbP.Пол.Add(new Пол() { Пол1 = pol });
                                 dbcl.dbP.SaveChanges(); //закинули в таблицу и сохранили
                                 p = dbcl.dbP.Пол.FirstOrDefault(x => x.Пол1 == pol); //ищем его сущность для получения ида
                                 f.RegPol.ItemsSource = dbcl.dbP.Пол.ToList();//обновляем комбобокс с гендерами
                             }
                             dbcl.dbP.Пользователи.Add(new Пользователи() { Имя = name, Фамилия = fam, Пол = p.id, Роль = r.id, Логин = login, Пароль = pas.GetHashCode().ToString() });
                             dbcl.dbP.SaveChanges();
-                            dialog("Аккаунт зарегестрирован!\nЖелаете войти?", "Информация", new VhodPage(),i+1);
+                            dialog("Аккаунт зарегестрирован!\nЖелаете войти?", "Информация", new VhodPage(), i + 1);
                             f.RegFam.Text = "";
                             f.RegLogin.Text = "";
                             f.RegName.Text = "";
@@ -152,13 +180,13 @@ namespace CinemaDB
                 }
                 else
                 {
-                    dialog("Пользователь с таким логином уже существует.\nЕсли это ваш аккаунт, то нажмите \"Да\" для входа!", "Ошибка", new VhodPage(),i+1);
+                    dialog("Пользователь с таким логином уже существует.\nЕсли это ваш аккаунт, то нажмите \"Да\" для входа!", "Ошибка", new VhodPage(), i + 1);
                     return;
                 }
             }
             else
             {
-                dobavstr(f, i+1);
+                dobavstr(f, i + 1);
             }
         }
 
@@ -169,7 +197,7 @@ namespace CinemaDB
             {
                 f = (VhodPage)stranpereh[i];
                 string log = f.VhodLogin.Text, pas = f.VhodPass.Password;
-                if (log != ""&&pas!="")
+                if (log != "" && pas != "")
                 {
                     Пользователи ne = dbcl.dbP.Пользователи.FirstOrDefault(x => x.Логин == log);
                     if (ne != null)
@@ -180,7 +208,7 @@ namespace CinemaDB
                             BtnReg.IsEnabled = false;
                             BtnVihod.IsEnabled = true;
                             if (ne.Роль == 1)
-                                dobavstr(new AdmMainPage(), 0);
+                                dobavstr(new AdmMainPage(ne), 0);
                             else
                                 dobavstr(new Kabinet(ne), 0);
                         }
@@ -191,7 +219,7 @@ namespace CinemaDB
                     }
                     else
                     {
-                        dialog("Такого логина не существует!\nЖелаете зарегестрироваться?", "Ошибка авторизации!", new RegPage(),i+1);
+                        dialog("Такого логина не существует!\nЖелаете зарегестрироваться?", "Ошибка авторизации!", new RegPage(), i + 1);
                         return;
                     }
                 }
@@ -200,7 +228,7 @@ namespace CinemaDB
                     MessageBox.Show("Вы ввели не все данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
-                
+
             }
             else
             {
@@ -229,8 +257,8 @@ namespace CinemaDB
 
         private void VihodClick(object sender, RoutedEventArgs e)
         {
-            dialog("Вы уверены, что хотите выйти из аккаунта?", "", new VhodPage(),0);
-            if(ii<=1)
+            dialog("Вы уверены, что хотите выйти из аккаунта?", "", new VhodPage(), 0);
+            if (ii <= 1)
             {
                 BtnVhod.IsEnabled = true;
                 BtnReg.IsEnabled = true;
