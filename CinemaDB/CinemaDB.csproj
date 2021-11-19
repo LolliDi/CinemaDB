@@ -81,6 +81,9 @@
     <Compile Include="DobiRedFilm.xaml.cs">
       <DependentUpon>DobiRedFilm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Kabinet.xaml.cs">
+      <DependentUpon>Kabinet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PolzMainPage.xaml.cs">
       <DependentUpon>PolzMainPage.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DobiRedFilm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Kabinet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
