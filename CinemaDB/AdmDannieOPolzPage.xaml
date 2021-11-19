@@ -16,24 +16,23 @@
             Данные
         </TextBlock>
         <StackPanel Margin="-5,-19,0,0">
-            <DataGrid FontWeight="Bold" Name="DGDanPolz" Margin="-5,30,0,90"   RowBackground="Transparent"  HeadersVisibility="Column" VerticalGridLinesBrush="#40826D" HorizontalGridLinesBrush="#40826D"  CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True">
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="Transparent" />
+            <DataGrid FontWeight="Bold" Name="DGDanPolz" Margin="2,30,0,90"   RowBackground="Transparent"  HeadersVisibility="Column" VerticalGridLinesBrush="#40826D" HorizontalGridLinesBrush="#40826D"  CanUserAddRows="False" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="Transparent" BorderBrush="Transparent" IsReadOnly="True" Width="624">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="Transparent" />
                         <Setter Property="Margin" Value="0,0,0,-14"/>
                     </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Binding="{Binding id}" Width="24"/>
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}" Width="100"/>
-                <DataGridTextColumn Header="Имя" Binding="{Binding Имя}" Width="100"/>
-                <DataGridTextColumn Header="Пол" Binding="{Binding Пол}" Width="80"/>
-                <DataGridTextColumn Header="Роль" Binding="{Binding Роль}" Width="110"/>
-                <DataGridTextColumn Header="Логин" Binding="{Binding Логин}" Width="90"/>
-                <DataGridTextColumn Header="Пароль" Binding="{Binding Пароль}" Width="95"/>
-            </DataGrid.Columns>
-
-        </DataGrid>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Binding="{Binding id}" Width="24"/>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Фамилия}" Width="100"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Имя}" Width="100"/>
+                    <DataGridTextColumn Header="Пол" Binding="{Binding Пол}" Width="80"/>
+                    <DataGridTextColumn Header="Роль" Binding="{Binding Роль}" Width="110"/>
+                    <DataGridTextColumn Header="Логин" Binding="{Binding Логин}" Width="90"/>
+                    <DataGridTextColumn Header="Пароль" Binding="{Binding Пароль}" Width="95"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </Page>

@@ -26,6 +26,9 @@ namespace CinemaDB
             initial();
         }
 
+        private string _cena = "";
+        private string _prodano = "";
+        private Regex _chislo = new Regex(@"\d*");
         public void initial()
         {
             InitializeComponent();
@@ -228,6 +231,14 @@ namespace CinemaDB
                             }
                             throw new Exception(otv);
                         }
+
+                        int prodanoBiletov = Convert.ToInt32(prodano);
+                        int kolMest = dbcl.dbP.Информация_о_залах.First(x => x.id == idZal).Количество_мест;
+                        if (kolMest<prodanoBiletov)
+                        {
+                            throw new Exception("В данном зале только " + kolMest + " мест!\nПоменяйте колличество проданых билетов!");
+                        }
+
                         if (newSeans == null) //если добавляем сеанс
                         {
                             dbcl.dbP.Залы.Add(new Залы() { Сеанс = idSeans.id, Зал = idZal, Цена = Convert.ToInt32(cena), Дата = dSeans, Продано = Convert.ToInt32(prodano) });
@@ -242,7 +253,7 @@ namespace CinemaDB
                         }
                         dbcl.dbP.SaveChanges();
                         rez += "Сеанс - успешно добавлено/изменено!\n";
-                        MessageBoxResult res = MessageBox.Show(rez + "Хотите перейти в базу?\nДа - перейти\nНет - отчистить поля\nНазад - оставить всё как есть", "Выполнено!", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+                        MessageBoxResult res = MessageBox.Show(rez + "Хотите перейти в базу?\nДа - перейти\nНет - отчистить поля\nОтмена - оставить всё как есть", "Выполнено!", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
                         switch(res)
                         {
                             case MessageBoxResult.Yes:
@@ -250,6 +261,7 @@ namespace CinemaDB
                                 break;
                             case MessageBoxResult.No:
                                 s.dobavstr(new DobiRedFilm(), s.i);
+                                s.stranpereh[s.i - 1] = new Seans();
                                 break;
                             default:
                                 s.dobavstr(new DobiRedFilm(nazv), s.i);
@@ -280,6 +292,30 @@ namespace CinemaDB
             TBDateSeans.Text = text + DPDateSeans.Text;
         }
 
-       
+        private void changedChislo(TextBox tb, ref string s) //проверка на то, вводим ли мы цифру
+        {
+            string text = tb.Text;
+            if (_chislo.IsMatch(text)) //проверяем цифра ли
+            {
+                s = text; 
+            }
+            else
+            {
+                tb.Text = s;
+                tb.SelectionStart = s.Length; // установка курсора в конец
+                MessageBox.Show("Сюда можно вводить только цифру!");
+            }
+            
+        }
+
+        private void TBCenaTextChanged(object sender, TextChangedEventArgs e)
+        {
+            changedChislo(TBCena, ref _cena);
+        }
+
+        private void TBProdanoTextChanged(object sender, TextChangedEventArgs e)
+        {
+            changedChislo(TBProdano, ref _prodano);
+        }
     }
 }

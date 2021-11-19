@@ -73,6 +73,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="ClFrame.cs" />
     <Compile Include="dbcl.cs" />
+    <Compile Include="DBColor.cs" />
     <Compile Include="dbModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

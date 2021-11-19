@@ -24,7 +24,11 @@
                     <ComboBox.Resources>
                         <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}" Color="#9040826D"/>
                     </ComboBox.Resources>
-                    
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="Black"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
 
                 </ComboBox>
             </StackPanel>

@@ -22,7 +22,7 @@ namespace CinemaDB
             InitializeComponent();
             dbcl.dbP = new dbEntities();
             ClFrame.Fr = FrameStr;
-            dobavstr(new AdmMainPage(), i);
+            dobavstr(new VhodPage(), i);
         }
         private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e) //перемещение окна мышкой
         {
