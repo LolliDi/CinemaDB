@@ -15,8 +15,13 @@
             </TextBlock.Effect>
             Кабинет
         </TextBlock>
-        <StackPanel Orientation="Horizontal" Margin="50,100,0,0">
-            <Image Name="Photo" Source="{Binding}" Width="100" Height="130" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Horizontal" Margin="70,70,0,0">
+            <StackPanel Orientation="Vertical">
+                <Image Name="Photo" Source="Images/noavatar.png" Stretch="Fill" Width="100" Height="130" VerticalAlignment="Top"/>
+                <Button Name="BtnRedactPhoto" Click="BtnRedactPhotoClick" Template="{StaticResource but}" Width="130" Margin="0,5">
+                    <TextBlock Text="Изменить фото" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+                </Button>
+            </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20,0" HorizontalAlignment="Left" Width="300">
                 <TextBlock Name="TBName" Text="Имя" HorizontalAlignment="Left"/>
                 <TextBlock Name="TBFam" Text="Фамилия" HorizontalAlignment="Left"/>
@@ -25,8 +30,11 @@
                 <Button Name="BtnRedact" Click="BtnRedactClick" Template="{StaticResource but}" Width="130">
                     <TextBlock Text="Редактировать" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
                 </Button>
-                <Button Name="BtnRedact" Click="BtnRedactClick" Template="{StaticResource but}" Width="130">
-                    <TextBlock Text="Редактировать" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+                <Button Name="BtnRedactPas" Click="BtnRedactPasClick" Template="{StaticResource but}" Width="150" Margin="0,5">
+                    <TextBlock Text="Изменить пароль" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
+                </Button>
+                <Button Name="BtnRedactLog" Click="BtnRedactLogClick" Template="{StaticResource but}" Width="140">
+                    <TextBlock Text="Изменить логин" Foreground="Black" Margin="10,0" HorizontalAlignment="Center"/>
                 </Button>
             </StackPanel>
         </StackPanel>

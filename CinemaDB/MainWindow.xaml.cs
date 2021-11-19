@@ -182,7 +182,7 @@ namespace CinemaDB
                             if (ne.Роль == 1)
                                 dobavstr(new AdmMainPage(), 0);
                             else
-                                dobavstr(new PolzMainPage(), 0);
+                                dobavstr(new Kabinet(ne), 0);
                         }
                         else
                         {

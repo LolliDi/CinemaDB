@@ -24,5 +24,6 @@ namespace CinemaDB
     
         public virtual Пол Пол1 { get; set; }
         public virtual Роли Роли { get; set; }
+        public virtual Фото Фото { get; set; }
     }
 }

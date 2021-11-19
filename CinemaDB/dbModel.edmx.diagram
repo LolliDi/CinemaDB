@@ -5,22 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="012afe5f35a84b5fb583393c9165b326" Name="Diagram1">
-        <EntityTypeShape EntityType="dbPolzModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" />
-        <EntityTypeShape EntityType="dbPolzModel.Жанры" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="dbPolzModel.Жанры" Width="1.5" PointX="0.75" PointY="5.375" />
         <EntityTypeShape EntityType="dbPolzModel.Залы" Width="1.5" PointX="7.5" PointY="1" />
         <EntityTypeShape EntityType="dbPolzModel.Информация_о_залах" Width="1.5" PointX="5.25" PointY="5.375" />
-        <EntityTypeShape EntityType="dbPolzModel.Ограничения" Width="1.5" PointX="0.75" PointY="5.375" />
-        <EntityTypeShape EntityType="dbPolzModel.Пол" Width="1.5" PointX="7.75" PointY="5.5" />
+        <EntityTypeShape EntityType="dbPolzModel.Ограничения" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="dbPolzModel.Пол" Width="1.5" PointX="7.75" PointY="8.625" />
         <EntityTypeShape EntityType="dbPolzModel.Пользователи" Width="1.5" PointX="10" PointY="5" />
-        <EntityTypeShape EntityType="dbPolzModel.Роли" Width="1.5" PointX="7.75" PointY="8.5" />
+        <EntityTypeShape EntityType="dbPolzModel.Роли" Width="1.5" PointX="7.75" PointY="5.625" />
         <EntityTypeShape EntityType="dbPolzModel.Сеансы" Width="1.5" PointX="5.25" PointY="1.25" />
         <EntityTypeShape EntityType="dbPolzModel.Фильмы" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="dbPolzModel.Фото" Width="1.5" PointX="12.25" PointY="5.5" />
         <AssociationConnector Association="dbPolzModel.FK_Фильмы_Жанры" />
         <AssociationConnector Association="dbPolzModel.FK_Залы_Информация_о_залах" />
         <AssociationConnector Association="dbPolzModel.FK_Залы_Сеансы" />
         <AssociationConnector Association="dbPolzModel.FK_Фильмы_Ограничения" />
         <AssociationConnector Association="dbPolzModel.FK_Пользователи_Пол" />
         <AssociationConnector Association="dbPolzModel.FK_Пользователи_Роли1" />
+        <AssociationConnector Association="dbPolzModel.FK_Фото_Пользователи" />
         <AssociationConnector Association="dbPolzModel.FK_Сеансы_Фильмы" />
       </Diagram>
     </edmx:Diagrams>

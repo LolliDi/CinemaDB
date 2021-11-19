@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -94,9 +95,6 @@
     <Compile Include="Seans.xaml.cs">
       <DependentUpon>Seans.xaml</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>dbModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="VhodPage.xaml.cs">
       <DependentUpon>VhodPage.xaml</DependentUpon>
     </Compile>
@@ -125,6 +123,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Фильмы.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Фото.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Page Include="AdmDannieOPolzPage.xaml">
@@ -227,6 +228,7 @@
       <DependentUpon>dbModel.edmx</DependentUpon>
       <LastGenOutput>dbModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\noavatar.png" />
     <Resource Include="Images\logo.png" />
   </ItemGroup>
   <ItemGroup>
