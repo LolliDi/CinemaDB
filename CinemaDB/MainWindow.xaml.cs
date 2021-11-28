@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace CinemaDB
 {
@@ -18,7 +20,10 @@ namespace CinemaDB
         int ii = 0; //страниц всего
         public List<object> stranpereh = new List<object>();
         //List<People> polzov = new List<People>();
-
+        private DoubleAnimation _vrashKoles = new DoubleAnimation();
+        private bool _proigrAnim = false;
+        private ColorAnimation _ReclamaPoyavlen = new ColorAnimation(); //цвет текста
+        private DoubleAnimation _ReclamaUvelPerv = new DoubleAnimation(); //увеличение шрифта
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +32,19 @@ namespace CinemaDB
             dobavstr(new VhodPage(), i);
             Thread time = new Thread(STime) { IsBackground = true }; //создание потока
             time.Start(); //запуск
-
+            _vrashKoles.From = 0;
+            _vrashKoles.To = 360;
+            _vrashKoles.RepeatBehavior = RepeatBehavior.Forever;
+            _vrashKoles.SpeedRatio = 0.2;
+            ColorConverter conv = new ColorConverter();
+            _ReclamaPoyavlen.From = (Color)conv.ConvertFrom("#00000000");
+            _ReclamaPoyavlen.To = (Color)conv.ConvertFrom("#000000");
+            _ReclamaPoyavlen.Duration = TimeSpan.FromSeconds(3);
+            _ReclamaPoyavlen.AutoReverse = true;
+            _ReclamaUvelPerv.From = 14;
+            _ReclamaUvelPerv.To = 45;
+            _ReclamaUvelPerv.Duration = TimeSpan.FromSeconds(3);
+            //_ReclamaPoyavlen.From
         }
 
         private void STime() //поток с часами
@@ -39,8 +56,7 @@ namespace CinemaDB
                 {
                     try
                     {
-                        var result = client.GetAsync("https://time100.ru/",
-                              HttpCompletionOption.ResponseHeadersRead).Result; //получение заголовков сайта
+                        var result = client.GetAsync("https://time100.ru/", HttpCompletionOption.ResponseHeadersRead).Result; //получение заголовков сайта
                         d = result.Headers.Date.Value.LocalDateTime; //вытягиваем из заголовка дату для нашего региона
                     }
                     catch //если произошла ошибка или пропало соединение - будем получать время с компа
@@ -70,6 +86,9 @@ namespace CinemaDB
                 i = ind;
             }
             prover();
+            TBRecl.Visibility = Visibility.Collapsed;
+            TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, null);
+            TBRecl.BeginAnimation(FontSizeProperty, null);
         }
 
         private void prover()
@@ -102,6 +121,9 @@ namespace CinemaDB
                 }
             }
             stranpereh.Insert(ind, ss); //вставляем по индексу
+            TBRecl.Visibility = Visibility.Collapsed;
+            TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, null);
+            TBRecl.BeginAnimation(FontSizeProperty, null);
             ClFrame.Fr.Navigate(stranpereh[ind]); //переходим
             i = ind;
             ii = ind + 1;
@@ -264,6 +286,114 @@ namespace CinemaDB
                 BtnReg.IsEnabled = true;
                 BtnVihod.IsEnabled = false;
             }
+        }
+
+        private void ReclClick(object sender, RoutedEventArgs e)
+        {
+            _proigrAnim = !_proigrAnim;
+            if(_proigrAnim)
+            {
+                malKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKoles);
+                bolshoeKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKoles);
+                DoubleAnimation ShirKart = new DoubleAnimation()
+                {
+                    From = 98,
+                    To = 148,
+                    Duration = TimeSpan.FromSeconds(2),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                DoubleAnimation ShirBtn = new DoubleAnimation()
+                {
+                    From = 70,
+                    To = 100,
+                    Duration = TimeSpan.FromSeconds(3),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                DoubleAnimation VisBtn = new DoubleAnimation()
+                {
+                    From = 24,
+                    To = 50,
+                    Duration = TimeSpan.FromSeconds(3),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                ColorConverter conv = new ColorConverter();
+                ColorAnimation backBtn = new ColorAnimation()
+                {
+                    From = (Color)conv.ConvertFrom("#40826D"),
+                    To = (Color)conv.ConvertFrom("#FF0000"),
+                    Duration = TimeSpan.FromSeconds(3),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                DoubleAnimation TextBtn = new DoubleAnimation()
+                {
+                    From = 15,
+                    To = 22,
+                    Duration = TimeSpan.FromSeconds(3),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                Logo.BeginAnimation(WidthProperty, ShirKart);
+                Logo.BeginAnimation(HeightProperty, ShirKart);
+                BtnRecl.BeginAnimation(WidthProperty, ShirBtn);
+                BtnRecl.BeginAnimation(HeightProperty, VisBtn);
+                ReclBtnTB.BeginAnimation(FontSizeProperty, TextBtn);
+                BtnRecl.Background.BeginAnimation(SolidColorBrush.ColorProperty, backBtn);
+                if (stranpereh[i].GetType() == typeof(VhodPage))
+                {
+                    TBRecl.Text = "ВНИМАНИЕ!";
+                    TBRecl.Visibility = Visibility.Visible;
+                    ColorAnimation recl = _ReclamaPoyavlen;
+                    recl.Completed += new EventHandler(Anim1Completed);
+                    TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, recl); //событие завершения анимации
+                    TBRecl.BeginAnimation(FontSizeProperty, _ReclamaUvelPerv);
+                   
+                }
+            }
+            else
+            {
+                malKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, null);
+                bolshoeKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, null);
+                TBRecl.Visibility = Visibility.Collapsed;
+                TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, null);
+                TBRecl.BeginAnimation(FontSizeProperty, null);
+                Logo.BeginAnimation(WidthProperty, null);
+                Logo.BeginAnimation(HeightProperty, null);
+                BtnRecl.BeginAnimation(WidthProperty, null);
+                BtnRecl.BeginAnimation(HeightProperty, null);
+                ReclBtnTB.BeginAnimation(FontSizeProperty, null);
+                BtnRecl.Background.BeginAnimation(SolidColorBrush.ColorProperty, null);
+            }
+           
+        }
+        private void Anim1Completed(object sender, EventArgs e)
+        {
+            TBRecl.Text = "ТОЛЬКО СЕГОДНЯ!";
+            ColorAnimation recl = _ReclamaPoyavlen;
+            recl.Completed += new EventHandler(Anim2Completed);
+            TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, recl);
+            TBRecl.BeginAnimation(FontSizeProperty, _ReclamaUvelPerv);
+        }
+
+        private void Anim2Completed(object sender, EventArgs e)
+        {
+            TBRecl.Text = "СКИДОК НЕТ!";
+            ColorAnimation recl = _ReclamaPoyavlen;
+            recl.Completed += new EventHandler(Anim3Completed);
+            TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, recl);
+            TBRecl.BeginAnimation(FontSizeProperty, _ReclamaUvelPerv);
+        }
+
+        private void Anim3Completed(object sender, EventArgs e)
+        {
+            TBRecl.Text = "ВНИМАНИЕ!";
+            ColorAnimation recl = _ReclamaPoyavlen;
+            recl.Completed += new EventHandler(Anim1Completed);
+            TBRecl.Foreground.BeginAnimation(SolidColorBrush.ColorProperty, recl);
+            TBRecl.BeginAnimation(FontSizeProperty, _ReclamaUvelPerv);
         }
     }
 

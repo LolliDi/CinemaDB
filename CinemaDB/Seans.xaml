@@ -47,7 +47,7 @@
                             <Button Margin="0,2,0,0" Uid="{Binding id}" Click="UdalFilmClick" Template="{StaticResource but}" Height="25" Width="135">
                                 <TextBlock Margin="0" Foreground="Black">Удалить фильм</TextBlock>
                             </Button>
-                            <ListView Panel.ZIndex="50" BorderThickness="0" Background="Transparent"  x:Name="LVFilmZal" Uid="{Binding id}" Loaded="InfZalLoaded" >
+                            <ListView BorderThickness="0" Background="Transparent"  x:Name="LVFilmZal" Uid="{Binding id}" Loaded="InfZalLoaded" Panel.ZIndex="100">
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel HorizontalAlignment="Center"/>
@@ -79,7 +79,7 @@
                                                     <TextBlock>Кол-во мест:</TextBlock>
                                                     <TextBlock Uid="{Binding Зал}" Loaded="TBKolZal"/>
                                                 </StackPanel>
-                                                <ListView Panel.ZIndex="100" VerticalAlignment="Top" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Name="LVSeansInfo"  Uid="{Binding id}" Loaded="InfSeansLoaded" Width="auto" MaxWidth="300" Height="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                <ListView Panel.ZIndex="10" VerticalAlignment="Top" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Name="LVSeansInfo"  Uid="{Binding id}" Loaded="InfSeansLoaded" Width="auto" MaxWidth="300" Height="auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                                     <ListView.ItemsPanel>
                                                         <ItemsPanelTemplate>
                                                             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"/>
