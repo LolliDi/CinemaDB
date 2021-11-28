@@ -375,6 +375,7 @@ namespace CinemaDB
                 BtnRecl.BeginAnimation(HeightProperty, null);
                 ReclBtnTB.BeginAnimation(FontSizeProperty, null);
                 BtnRecl.Background.BeginAnimation(SolidColorBrush.ColorProperty, null);
+                BtnRecl.BeginAnimation(MarginProperty, null);
             }
            
         }
