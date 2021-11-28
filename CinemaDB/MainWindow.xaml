@@ -228,7 +228,7 @@ Title="MainWindow"
                 <DropShadowEffect Color="Gray" BlurRadius="5"/>
             </TextBlock.Effect>
         </TextBlock>
-        <TextBlock Name="TBRecl" Margin="129,381,190,155" Foreground="#000000" FontSize="14" >ВНИМАНИЕ!</TextBlock>
+        <TextBlock Name="TBRecl" Margin="129,381,190,155" Foreground="#000000" FontSize="14" Visibility="Collapsed">ВНИМАНИЕ!</TextBlock>
         <Image Name="Logo" Source="Images\logo.png"  Margin ="575,-667,0,0" Width="98" Height="98"/>
         <Button Name="BtnVhod" Click="VhodClick" Height="24" Width="70" Margin="748,417,32,311" Template="{StaticResource but}">
             <TextBlock Foreground="Black" FontSize="15" Margin="0">Вход</TextBlock>
