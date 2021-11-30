@@ -15,6 +15,85 @@
             </TextBlock.Effect>
             Сеансы
         </TextBlock>
+        <Menu Height="32" VerticalAlignment="Top" Background="Transparent" Width="100" Margin="-140,-2,0,0">
+            <MenuItem>
+                <MenuItem.Header>
+                    <TextBlock Foreground="Black">Фильтрация</TextBlock>
+                </MenuItem.Header>
+                <StackPanel Orientation="Horizontal" Margin="-30,0">
+                    <TextBlock Foreground="Black" Margin="0,5,65,0">Жанр:</TextBlock>
+                    <ComboBox x:Name="CBZhanr" Height="30" Width="190" SelectionChanged="CBZhanrSelectionChanged">
+                        <ComboBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.WindowBrushKey}"  Color="#9040826D"/>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Foreground="Black" Margin="0,-2"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="-30,0">
+                    <TextBlock Foreground="Black" Margin="0,5,30,0">Название:</TextBlock>
+                    <TextBox Name="TBPoisk" TextChanged="TBPoiskTextChanged" Margin="0,3"/>
+                </StackPanel>
+                <StackPanel Margin="-15,0,-65,0">
+                <TextBlock Foreground="Black" Margin="0">Залы:</TextBlock>
+                    <StackPanel Orientation="Horizontal" >
+
+                        <CheckBox Name="ChBZ1" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black"  Margin="0,3">1</TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Name="ChBZ2" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black" Margin="0,3">2</TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Name="ChBZ3" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black" Margin="0,3">3</TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Name="ChBZ4" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black" Margin="0,3">4</TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Name="ChBZ5" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black" Margin="0,3">5</TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Name="ChBZ6" Margin="-3,-3,10,0" Checked="ChBZChecked"  Unchecked="ChBZChecked">
+                            <TextBlock Foreground="Black" Margin="0,3">6</TextBlock>
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="-30,0,-45,0">
+                    <TextBlock Text="Сортировка" Foreground="Black" Margin="0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton GroupName="RBSort" Name="SortName" IsChecked="True">
+                            <TextBlock Text="Название" Foreground="Black" Margin="0,0,5,0"/>
+                        </RadioButton>
+                        
+                        <RadioButton GroupName="RBSort" Name="SortVozr">
+                            <TextBlock Text="Возраст" Foreground="Black" Margin="0,0,5,0"/>
+                        </RadioButton>
+                        
+                        <RadioButton GroupName="RBSort" Name="SortKolSeans">
+                            <TextBlock Text="Дата выхода" Foreground="Black" Margin="0"/>
+                        </RadioButton>
+                        
+                    </StackPanel>
+                    <StackPanel Margin="30,0,0,7" Orientation="Horizontal">
+                        <Button Template="{StaticResource but}" Click="VozrastClick">
+                            <TextBlock Foreground="Black" FontSize="15" Margin="5,0">По возрастанию</TextBlock>
+                        </Button>
+                        <Button Margin="15,0,-20,0" Template="{StaticResource but}" Click="YbivClick">
+                            <TextBlock Foreground="Black" FontSize="15" Margin="5,0">По убыванию</TextBlock>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                
+            </MenuItem>
+        </Menu>
         <ListView BorderThickness="0" Margin="-7,20,-8,-7" Background="Transparent" x:Name="LVFilm" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Panel.ZIndex="1000" ScrollViewer.PanningMode="VerticalOnly">
 
             <ListView.ItemsPanel>
@@ -25,8 +104,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="8">
-                        
-                        
                         <StackPanel Orientation="Vertical" >
                             <TextBlock Text="{Binding Название}" FontSize="23"/>
                             <StackPanel Orientation="Horizontal" Margin="15,-8">

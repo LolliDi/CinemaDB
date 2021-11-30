@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CinemaDB
 {
@@ -20,10 +11,22 @@ namespace CinemaDB
     /// </summary>
     public partial class Seans : Page
     {
+        private List<Фильмы> _filt = new List<Фильмы>();
         public Seans()
         {
             InitializeComponent();
-            LVFilm.ItemsSource = dbcl.dbP.Фильмы.ToList();
+            CBZhanr.Items.Add("Все");
+            foreach (string s in dbcl.dbP.Жанры.Select(x => x.Жанр).ToList())
+            {
+                CBZhanr.Items.Add(s);
+            }
+            ChBZ1.IsChecked = true;
+            ChBZ2.IsChecked = true;
+            ChBZ3.IsChecked = true;
+            ChBZ4.IsChecked = true;
+            ChBZ5.IsChecked = true;
+            ChBZ6.IsChecked = true;
+            CBZhanr.SelectedIndex = 0;
             
         }
 
@@ -69,21 +72,21 @@ namespace CinemaDB
 
         private void IzmenFilmClick(object sender, RoutedEventArgs e)
         {
-            foreach(Window w in Application.Current.Windows)
+            foreach (Window w in Application.Current.Windows)
             {
-                if(w.GetType()==typeof(MainWindow))
+                if (w.GetType() == typeof(MainWindow))
                 {
                     MainWindow s = (MainWindow)w;
                     Button btn = (Button)sender;
                     int uid = Convert.ToInt32(btn.Uid);
-                    s.dobavstr(new DobiRedFilm(dbcl.dbP.Фильмы.FirstOrDefault(x => x.id == uid)),s.i+1);
+                    s.dobavstr(new DobiRedFilm(dbcl.dbP.Фильмы.FirstOrDefault(x => x.id == uid)), s.i + 1);
                 }
             }
         }
 
         private void IzmenSeansClick(object sender, RoutedEventArgs e)
         {
-            foreach(Window w in Application.Current.Windows)
+            foreach (Window w in Application.Current.Windows)
             {
                 if (w.GetType() == typeof(MainWindow))
                 {
@@ -103,7 +106,7 @@ namespace CinemaDB
             int idSeans = udzal.Сеанс;
             dbcl.dbP.Залы.Remove(udzal);
             dbcl.dbP.SaveChanges();
-            if(dbcl.dbP.Залы.Where(x=>x.Сеанс==idSeans).ToList().Count<1)
+            if (dbcl.dbP.Залы.Where(x => x.Сеанс == idSeans).ToList().Count < 1)
             {
                 dbcl.dbP.Сеансы.Remove(dbcl.dbP.Сеансы.FirstOrDefault(X => X.id == idSeans));
                 dbcl.dbP.SaveChanges();
@@ -133,6 +136,100 @@ namespace CinemaDB
                     s.dobavstr(new Seans(), s.i);
                 }
             }
+        }
+
+        private void filter()
+        {
+            List<Фильмы> filt1 = new List<Фильмы>();
+            
+            int id = CBZhanr.SelectedIndex;
+            if (id == 0)
+            {
+                _filt = dbcl.dbP.Фильмы.ToList();
+            }
+            else
+            {
+                _filt = dbcl.dbP.Фильмы.Where(X => X.Жанр == id).ToList();
+            }
+            if (TBPoisk.Text != "")
+            {
+                
+                foreach (Фильмы s in _filt)
+                {
+                    if (s.Название.ToLower().IndexOf(TBPoisk.Text.ToLower()) != -1)
+                    {
+                        filt1.Add(s);
+                    }
+                }
+                _filt = filt1;
+                filt1 = new List<Фильмы>();
+            }
+            filt1 = ProverChBZ((bool)ChBZ1.IsChecked, 1, filt1);
+            filt1 = ProverChBZ((bool)ChBZ2.IsChecked, 2, filt1);
+            filt1 = ProverChBZ((bool)ChBZ3.IsChecked, 3, filt1);
+            filt1 = ProverChBZ((bool)ChBZ4.IsChecked, 4, filt1);
+            filt1 = ProverChBZ((bool)ChBZ5.IsChecked, 5, filt1);
+            filt1 = ProverChBZ((bool)ChBZ6.IsChecked, 6, filt1);
+            _filt = filt1;
+            
+            LVFilm.ItemsSource = _filt;
+        }
+
+        private List<Фильмы> ProverChBZ(bool check, int zal, List<Фильмы> filt1)
+        {
+            if (check == true)
+            {
+                foreach (Фильмы s in _filt)
+                {
+                    if (s.Сеансы.Where(x => x.Зал == zal).Count() > 0)
+                    {
+                        if (!filt1.Contains(s))
+                        {
+                            filt1.Add(s);
+                        }
+                    }
+                }
+            }
+            return filt1;
+        }
+
+        private void CBZhanrSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            filter();
+        }
+
+        private void TBPoiskTextChanged(object sender, TextChangedEventArgs e)
+        {
+            filter();
+        }
+
+        private void ChBZChecked(object sender, RoutedEventArgs e)
+        {
+            filter();
+        }
+
+        private void VozrastClick(object sender, RoutedEventArgs e)
+        {
+            if(SortName.IsChecked==true)
+            {
+                _filt.Sort((x, y) => x.Название.CompareTo(y.Название));
+            }
+            else if(SortVozr.IsChecked==true)
+            {
+                _filt.Sort((x, y) => x.Возрастные_ограничения.CompareTo(y.Возрастные_ограничения));
+            }
+            else
+            {
+                _filt.Sort((x, y) => x.Дата_выхода.CompareTo(y.Дата_выхода));
+            }
+            LVFilm.Items.Refresh();
+        }
+
+        private void YbivClick(object sender, RoutedEventArgs e)
+        {
+            VozrastClick(sender, e);
+            _filt.Reverse();
+            LVFilm.Items.Refresh();
         }
     }
 }

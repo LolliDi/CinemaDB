@@ -20,7 +20,8 @@ namespace CinemaDB
         int ii = 0; //страниц всего
         public List<object> stranpereh = new List<object>();
         //List<People> polzov = new List<People>();
-        private DoubleAnimation _vrashKoles = new DoubleAnimation();
+        private DoubleAnimation _vrashKolesMal = new DoubleAnimation();
+        private DoubleAnimation _vrashKolesBol = new DoubleAnimation();
         private bool _proigrAnim = false;
         private ColorAnimation _ReclamaPoyavlen = new ColorAnimation(); //цвет текста
         private DoubleAnimation _ReclamaUvelPerv = new DoubleAnimation(); //увеличение шрифта
@@ -32,19 +33,22 @@ namespace CinemaDB
             dobavstr(new VhodPage(), i);
             Thread time = new Thread(STime) { IsBackground = true }; //создание потока
             time.Start(); //запуск
-            _vrashKoles.From = 0;
-            _vrashKoles.To = 360;
-            _vrashKoles.RepeatBehavior = RepeatBehavior.Forever;
-            _vrashKoles.SpeedRatio = 0.2;
+            _vrashKolesMal.From = 0;
+            _vrashKolesMal.To = 360;
+            _vrashKolesMal.RepeatBehavior = RepeatBehavior.Forever;
+            _vrashKolesMal.SpeedRatio = 0.2;
+            _vrashKolesBol.From = 0;
+            _vrashKolesBol.To = -360;
+            _vrashKolesBol.RepeatBehavior = RepeatBehavior.Forever;
+            _vrashKolesBol.SpeedRatio = 0.2;
             ColorConverter conv = new ColorConverter();
             _ReclamaPoyavlen.From = (Color)conv.ConvertFrom("#00000000");
             _ReclamaPoyavlen.To = (Color)conv.ConvertFrom("#000000");
-            _ReclamaPoyavlen.Duration = TimeSpan.FromSeconds(3);
+            _ReclamaPoyavlen.Duration = TimeSpan.FromSeconds(2);
             _ReclamaPoyavlen.AutoReverse = true;
             _ReclamaUvelPerv.From = 14;
             _ReclamaUvelPerv.To = 45;
-            _ReclamaUvelPerv.Duration = TimeSpan.FromSeconds(3);
-            //_ReclamaPoyavlen.From
+            _ReclamaUvelPerv.Duration = TimeSpan.FromSeconds(2);
         }
 
         private void STime() //поток с часами
@@ -293,8 +297,8 @@ namespace CinemaDB
             _proigrAnim = !_proigrAnim;
             if(_proigrAnim)
             {
-                malKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKoles);
-                bolshoeKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKoles);
+                malKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKolesMal);
+                bolshoeKoleso.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, _vrashKolesBol);
                 DoubleAnimation ShirKart = new DoubleAnimation()
                 {
                     From = 98,
@@ -314,7 +318,7 @@ namespace CinemaDB
                 DoubleAnimation VisBtn = new DoubleAnimation()
                 {
                     From = 24,
-                    To = 50,
+                    To = 33,
                     Duration = TimeSpan.FromSeconds(3),
                     AutoReverse = true,
                     RepeatBehavior = RepeatBehavior.Forever

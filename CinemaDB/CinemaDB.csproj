@@ -71,7 +71,6 @@
     <Compile Include="AdmMainPage.xaml.cs">
       <DependentUpon>AdmMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="ClFrame.cs" />
     <Compile Include="dbcl.cs" />
     <Compile Include="DBColor.cs" />
