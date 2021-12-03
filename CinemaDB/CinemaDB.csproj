@@ -85,6 +85,7 @@
     <Compile Include="Kabinet.xaml.cs">
       <DependentUpon>Kabinet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageChange.cs" />
     <Compile Include="RedactProfil.xaml.cs">
       <DependentUpon>RedactProfil.xaml</DependentUpon>
     </Compile>

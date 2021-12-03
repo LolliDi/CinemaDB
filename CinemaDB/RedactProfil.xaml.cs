@@ -51,7 +51,6 @@ namespace CinemaDB
                 if (SPPolz.Visibility == Visibility.Visible) //если изменяем данные
                 {
                     string otv = "";
-                    int i = 0;
                     if (TBName.Text != "")
                     {
                         tek.Имя = TBName.Text;

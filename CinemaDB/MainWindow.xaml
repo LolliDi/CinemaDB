@@ -214,17 +214,8 @@ Title="MainWindow"
             <TextBlock.ToolTip>
                 <ToolTip >
                     <TextBlock Foreground="Black" TextAlignment="Left">
-                        <Run Text="Поиск по жанру, названию, залам."/>
+                        <Run Text="Пагизация"/>
                         <LineBreak/>
-                        <Run Text="При поиске по залу - отображается фильм, который в нём идет,"/>
-                        <LineBreak/>
-                        <Run Text="со всеми остальными залами для этого фильма."/>
-                        <LineBreak/>
-                        <Run Text="Сортировка."/>
-                        <LineBreak/>
-                        <Run Text="Поменял направление вращения касет"/>
-                        <LineBreak/>
-                        <Run Text="Изменил размер кнопки рекламы при увеличении"/>
                     </TextBlock>
                 </ToolTip>
             </TextBlock.ToolTip>

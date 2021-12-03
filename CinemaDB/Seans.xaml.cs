@@ -27,7 +27,8 @@ namespace CinemaDB
             ChBZ5.IsChecked = true;
             ChBZ6.IsChecked = true;
             CBZhanr.SelectedIndex = 0;
-            
+            DataContext = pc;
+            pc.CountPage = _filt.Count;
         }
 
         private void InfZalLoaded(object sender, RoutedEventArgs e)
@@ -141,7 +142,7 @@ namespace CinemaDB
         private void filter()
         {
             List<Фильмы> filt1 = new List<Фильмы>();
-            
+            int kol=_filt.Count;
             int id = CBZhanr.SelectedIndex;
             if (id == 0)
             {
@@ -171,8 +172,18 @@ namespace CinemaDB
             filt1 = ProverChBZ((bool)ChBZ5.IsChecked, 5, filt1);
             filt1 = ProverChBZ((bool)ChBZ6.IsChecked, 6, filt1);
             _filt = filt1;
-            
-            LVFilm.ItemsSource = _filt;
+            if (kol != _filt.Count)
+            {
+                pc.CountPage = pc.CountPage;
+                
+                pc.Countlist = filt1.Count;
+                if (kol != 0)
+                {
+                    pc.CurrentPage = 1;
+                }
+            }
+            LVFilm.ItemsSource = _filt.Skip(0).Take(pc.CountPage).ToList();
+
         }
 
         private List<Фильмы> ProverChBZ(bool check, int zal, List<Фильмы> filt1)
@@ -222,14 +233,51 @@ namespace CinemaDB
             {
                 _filt.Sort((x, y) => x.Дата_выхода.CompareTo(y.Дата_выхода));
             }
-            LVFilm.Items.Refresh();
+            LVFilm.ItemsSource = _filt.Skip(0).Take(pc.CountPage).ToList();
         }
 
         private void YbivClick(object sender, RoutedEventArgs e)
         {
             VozrastClick(sender, e);
             _filt.Reverse();
-            LVFilm.Items.Refresh();
+            LVFilm.ItemsSource = _filt.Skip(0).Take(pc.CountPage).ToList();
+        }
+
+        PageChange pc = new PageChange();
+
+        private void GoPage_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            switch (tb.Uid)  // определяем, куда конкретно было сделано нажатие
+            {
+                case "prev":
+                    pc.CurrentPage--;
+                    break;
+                case "next":
+                    pc.CurrentPage++;
+                    break;
+                default:
+                    pc.CurrentPage = Convert.ToInt32(tb.Text);
+                    break;
+            }
+            LVFilm.ItemsSource = _filt.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();  // оображение записей постранично с определенным количеством на каждой странице
+            // Skip(pc.CurrentPage* pc.CountPage - pc.CountPage) - сколько пропускаем записей
+            // Take(pc.CountPage) - сколько записей отображаем на странице
+        }
+
+        private void TBKolZapTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                pc.CountPage = Convert.ToInt32(TBKolZap.Text); // если в текстовом поле есnь значение, присваиваем его свойству объекта, которое хранит количество записей на странице
+            }
+            catch
+            {
+                pc.CountPage = _filt.Count; // если в текстовом поле значения нет, присваиваем свойству объекта, которое хранит количество записей на странице количество элементов в списке
+            }
+            pc.Countlist = _filt.Count;  // присваиваем новое значение свойству, которое в объекте отвечает за общее количество записей
+            LVFilm.ItemsSource = _filt.Skip(0).Take(pc.CountPage).ToList();  // отображаем первые записи в том количестве, которое равно CountPage
+            pc.CurrentPage = 1;
         }
     }
 }
