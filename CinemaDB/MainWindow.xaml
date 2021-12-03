@@ -214,6 +214,18 @@ Title="MainWindow"
             <TextBlock.ToolTip>
                 <ToolTip >
                     <TextBlock Foreground="Black" TextAlignment="Left">
+                        <Run Text="Добавил часы с обновлением из интернета/с компа"/>
+                        <LineBreak/>
+                        <Run Text="Новая менюшка - Кабинет, добавление/изменение фото"/>
+                        <LineBreak/>
+                        <Run Text="Редактирование данных пользователя/админа"/>
+                        <LineBreak/>
+                        <Run Text="Изменение пароля, логина, учитывая требования к паролю"/>
+                        <LineBreak/>
+                        <Run Text="Немного переместил верхние надписи"/>
+                        <LineBreak/>
+                        <Run Text="Лого теперь используется буквой Р :)"/>
+                        <LineBreak/>
                         <Run Text="Анимация вращения колес"/>
                         <LineBreak/>
                         <Run Text="Реклама (текст будет показываться только на странице входа)"/>
