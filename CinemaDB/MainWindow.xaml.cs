@@ -30,7 +30,7 @@ namespace CinemaDB
             InitializeComponent();
             dbcl.dbP = new dbEntities();
             ClFrame.Fr = FrameStr;
-            dobavstr(new AdmMainPage(dbcl.dbP.Пользователи.First(x=>x.id==1)), i);
+            dobavstr(new VhodPage(), i);
             Thread time = new Thread(STime) { IsBackground = true }; //создание потока
             time.Start(); //запуск
             _vrashKolesMal.From = 0;

@@ -261,8 +261,6 @@ namespace CinemaDB
                     break;
             }
             LVFilm.ItemsSource = _filt.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();  // оображение записей постранично с определенным количеством на каждой странице
-            // Skip(pc.CurrentPage* pc.CountPage - pc.CountPage) - сколько пропускаем записей
-            // Take(pc.CountPage) - сколько записей отображаем на странице
         }
 
         private void TBKolZapTextChanged(object sender, TextChangedEventArgs e)
