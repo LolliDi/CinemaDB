@@ -56,20 +56,24 @@ namespace CinemaDB
             OpenFileDialog dial = new OpenFileDialog();
             dial.ShowDialog();
             string path = dial.FileName;
-            System.Drawing.Image SDI = System.Drawing.Image.FromFile(path);
-            ImageConverter ic = new ImageConverter();
-            byte[] bytePhoto = (byte[])ic.ConvertTo(SDI, typeof(byte[]));
-            if (photo == null)
+            if (path != "")
             {
-                dbcl.dbP.Фото.Add(new Фото() { id = tek.id, Путь = null, Изображение = bytePhoto });
-            }
-            else
-            {
-                photo.Изображение = bytePhoto;
-            }
-            dbcl.dbP.SaveChanges();
+                System.Drawing.Image SDI = System.Drawing.Image.FromFile(path);
+                ImageConverter ic = new ImageConverter();
+                byte[] bytePhoto = (byte[])ic.ConvertTo(SDI, typeof(byte[]));
+                if (photo == null)
+                {
+                    dbcl.dbP.Фото.Add(new Фото() { id = tek.id, Путь = null, Изображение = bytePhoto });
+                }
+                else
+                {
+                    photo.Изображение = bytePhoto;
+                }
+                dbcl.dbP.SaveChanges();
 
-            obnovInfo();
+
+                obnovInfo();
+            }
         }
     }
 }
