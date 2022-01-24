@@ -348,13 +348,23 @@ namespace CinemaDB
                     AutoReverse = true,
                     RepeatBehavior = RepeatBehavior.Forever,
                 };
+                ThicknessAnimation MarginTextBtn = new ThicknessAnimation()
+                {
+                    From = new Thickness(0, 0, 0, 0),
+                    To = new Thickness(0, 0, 0, 8),
+                    Duration = TimeSpan.FromSeconds(3),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever,
+                };
                 Logo.BeginAnimation(WidthProperty, ShirKart);
                 Logo.BeginAnimation(HeightProperty, ShirKart);
                 BtnRecl.BeginAnimation(WidthProperty, ShirBtn);
                 BtnRecl.BeginAnimation(HeightProperty, VisBtn);
                 ReclBtnTB.BeginAnimation(FontSizeProperty, TextBtn);
+                ReclBtnTB.BeginAnimation(MarginProperty, MarginTextBtn);
                 BtnRecl.Background.BeginAnimation(SolidColorBrush.ColorProperty, backBtn);
                 BtnRecl.BeginAnimation(MarginProperty, MarginBtn);
+
                 if (stranpereh[i].GetType() == typeof(VhodPage))
                 {
                     TBRecl.Text = "ВНИМАНИЕ!";
@@ -380,6 +390,7 @@ namespace CinemaDB
                 ReclBtnTB.BeginAnimation(FontSizeProperty, null);
                 BtnRecl.Background.BeginAnimation(SolidColorBrush.ColorProperty, null);
                 BtnRecl.BeginAnimation(MarginProperty, null);
+                ReclBtnTB.BeginAnimation(MarginProperty, null);
             }
            
         }
