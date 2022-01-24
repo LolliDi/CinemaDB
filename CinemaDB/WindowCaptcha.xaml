@@ -1,0 +1,24 @@
+﻿<Window x:Class="CinemaDB.WindowCaptcha"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CinemaDB"
+        mc:Ignorable="d"
+        Title="Капча" Height="190" Width="350"
+        ResizeMode="NoResize"
+        Background="#3e5769"
+        WindowStyle="None" BorderThickness="4" BorderBrush="Gray">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Image Name="ImagCaptch" Height="100" Width="310" Margin="0,0,0,5"/>
+            <TextBox x:Name="TBEnterCaptch" TextChanged="TBEnterCaptch_TextChanged"/>
+            <Button Template="{StaticResource but}" Width="60" Margin="-140,5,0,0" Click="Button_Click">
+                <TextBlock Foreground="Black" FontSize="15" Margin="0">Ввод</TextBlock>
+            </Button>
+            <TextBlock  Margin="10,-24,0,0" Width="64">Прошло:</TextBlock>
+            <ProgressBar Name="PTime" Margin="200,-24,0,0" Maximum="10" Width="130" Height="25"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

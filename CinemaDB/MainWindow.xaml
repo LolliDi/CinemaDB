@@ -214,7 +214,7 @@ Title="MainWindow"
             <TextBlock.ToolTip>
                 <ToolTip >
                     <TextBlock Foreground="Black" TextAlignment="Left">
-                        <Run Text="Пагизация"/>
+                        <Run Text="Капча + какой то фикс"/>
                         <LineBreak/>
                     </TextBlock>
                 </ToolTip>

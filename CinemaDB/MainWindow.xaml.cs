@@ -215,7 +215,6 @@ namespace CinemaDB
                 dobavstr(f, i + 1);
             }
         }
-
         private void VhodClick(object sender, RoutedEventArgs e)
         {
             VhodPage f = new VhodPage();
@@ -230,13 +229,41 @@ namespace CinemaDB
                     {
                         if (ne.Пароль == pas.GetHashCode().ToString()) //проверяем пароль
                         {
-                            BtnVhod.IsEnabled = false;
-                            BtnReg.IsEnabled = false;
-                            BtnVihod.IsEnabled = true;
-                            if (ne.Роль == 1)
-                                dobavstr(new AdmMainPage(ne), 0);
-                            else
-                                dobavstr(new Kabinet(ne), 0);
+                        while (true)
+                            {
+                                if (!CaptchaOtv.opnPage)
+                                {
+                                    WindowCaptcha w = new WindowCaptcha();
+                                    
+                                    w.Owner = this;
+                                    w.Visibility = System.Windows.Visibility.Visible;
+                                    w.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+                                    w.ShowDialog();
+                                }
+                                if (CaptchaOtv.captcha)
+                                {
+                                    BtnVhod.IsEnabled = false;
+                                    BtnReg.IsEnabled = false;
+                                    BtnVihod.IsEnabled = true;
+                                    if (ne.Роль == 1)
+                                        dobavstr(new AdmMainPage(ne), 0);
+                                    else
+                                        dobavstr(new Kabinet(ne), 0);
+                                    CaptchaOtv.captcha = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    if (!CaptchaOtv.opnPage&& !CaptchaOtv.captcha)
+                                    {
+                                        MessageBoxResult res = MessageBox.Show("Время ввода капчи истекло!\nЖелаете попробовать снова?", "Внимание", MessageBoxButton.YesNo);
+                                        if (res == MessageBoxResult.No)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         else
                         {

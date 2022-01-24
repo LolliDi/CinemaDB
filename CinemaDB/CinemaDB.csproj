@@ -71,6 +71,7 @@
     <Compile Include="AdmMainPage.xaml.cs">
       <DependentUpon>AdmMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CaptchaOtv.cs" />
     <Compile Include="ClFrame.cs" />
     <Compile Include="dbcl.cs" />
     <Compile Include="DBColor.cs" />
@@ -97,6 +98,9 @@
     </Compile>
     <Compile Include="VhodPage.xaml.cs">
       <DependentUpon>VhodPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowCaptcha.xaml.cs">
+      <DependentUpon>WindowCaptcha.xaml</DependentUpon>
     </Compile>
     <Compile Include="Жанры.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
@@ -179,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VhodPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowCaptcha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
